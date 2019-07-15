@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel=stylesheet type=text/css href=styles.css>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <aside>
+    <section>
+      <h1>IdeaBox Redux</h1>
+     </section>
+     <section>
+      <h2>Filter Starred Ideas</h2>
+      <button>Show Starred Ideas</button>
+     </section> 
+     <section>
+      <h2>Filter by Quality</h2>
+      <ul>
+        <li>Swill</li>
+        <li>Plausible</li>
+        <li>Genius</li>
+      </ul>
+      <form>
+        <label>New Quality</label>
+        <input>
+        <button>Add New Quality</button>
+      </form>
+     </section>
+    </aside>
+  <main>
+    <section>
+      <form>
+        <label>Title</label>
+        <input>
+        <label>Body</label>
+        <button>Save</button>
+      </form>
+      <div>
+        <img src="images/search.svg" alt="search icon">
+        <input type=text, placeholder="Search ideas">
+      </div>
+    </section>
+    <section>
+      <card>
+        <header>
+          <img src="images/star.svg" alt="white star">
+          <img src="images/delete.svg" alt="delete">
+        </header>
+        <div>
+          <h3>Idea title</h3>
+          <p>Placeholder</p>
+        </div>
+        <footer>
+          <img src="images/upvote.svg" alt="upvote">
+          <p>Quality:<span>Swill</span></p>
+          <img src="images/downvote.svg" alt="downvote">          
+        </footer>
+      </card>
+    </section>
+  </main>   
+
