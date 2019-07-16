@@ -84,7 +84,7 @@ li {
 li:hover {
   background-color: #D14119;
   border-left: solid 10px #F58E72;
-  padding-left: 4.3%;
+  padding-left: 6%;
 }
 
 li:active {
@@ -112,13 +112,13 @@ aside button {
 }
 
 aside button:hover {
-  background-color: #D14119;
-  border-color: #D14119;
+  background-color: #3c40a3;
+  border-color: #3c40a3;
 }
 
 aside button:active {
-  background-color: #A63414;
-  border-color: #A63414;
+  background-color: #2a2d73;
+  border-color: #2a2d73;
 }
 
 aside input {
