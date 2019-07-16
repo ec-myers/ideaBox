@@ -84,6 +84,7 @@ li {
 li:hover {
   background-color: #D14119;
   border-left: solid 10px #F58E72;
+  padding-left: 4.3%;
 }
 
 li:active {
