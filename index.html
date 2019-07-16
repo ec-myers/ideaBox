@@ -6,14 +6,14 @@
 </head>
 <body>
   <aside>
-    <section>
+    <section class="section-aside">
       <h1>IdeaBox Redux</h1>
      </section>
-     <section>
+     <section class="section-aside">
       <h2>Filter Starred Ideas</h2>
-      <button>Show Starred Ideas</button>
+      <button id="btn-starred">Show Starred Ideas</button>
      </section> 
-     <section>
+     <section class="section-aside">
       <h2>Filter by Quality</h2>
       <ul>
         <li>Swill</li>
@@ -23,30 +23,32 @@
       <form>
         <label>New Quality</label>
         <input>
-        <button>Add New Quality</button>
+        <button id="btn-quality">Add New Quality</button>
       </form>
      </section>
     </aside>
   <main>
-    <section>
-      <form>
-        <label>Title</label>
-        <input>
-        <label>Body</label>
-        <button>Save</button>
-      </form>
-      <div>
-        <img src="images/search.svg" alt="search icon">
-        <input type=text, placeholder="Search ideas">
-      </div>
+    <section class="section-top">
+      <article>
+        <form>
+          <label>Title</label>
+          <input>
+          <label>Body</label>
+          <button id="btn-save">Save</button>
+        </form>
+        <div class="div-search">
+          <img src="images/search.svg" alt="search icon">
+          <input type=text, placeholder="Search ideas">
+        </div>
+      </article>
     </section>
-    <section>
+    <section class="section-bottom">
       <card>
         <header>
           <img src="images/star.svg" alt="white star">
           <img src="images/delete.svg" alt="delete">
         </header>
-        <div>
+        <div class="card-content">
           <h3>Idea title</h3>
           <p>Placeholder</p>
         </div>
