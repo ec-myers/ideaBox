@@ -141,7 +141,7 @@ main {
 .section-top {
   display: flex;
   background-color: #A9AAD2;
-  height: 240px;
+  height: 377px;
   justify-content: center;
 }
 
@@ -162,14 +162,14 @@ article {
 .form-title {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
-  height: 27px;
+  height: 50px;
   margin: 5px 0;
 }
 
 .form-body {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
-  height: 55px;
+  height: 100px;
   margin: 5px 0;
 }
 
@@ -179,22 +179,22 @@ article {
   border-radius: 2px;
   color: #ffffff;
   font-size: 14px;
-  height: 27px;
+  height: 50px;
 }
 
 .div-search {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
   display: flex;
-  height: 27px;
+  height: 50px;
   margin-top: 18px;
   width: 100%;
 }
 
 .section-top img {
   background-color: #1F1F3D;
-  padding: 4px;
-  height: 23px;
+  padding: 11px 0px;
+  height: 100%;
 }
 
 .div-search input {
