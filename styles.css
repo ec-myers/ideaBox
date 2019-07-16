@@ -18,21 +18,22 @@ aside {
   background-color: #1F1F3D;
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 25%;
+  height: 100vh;
 }
 
 .section-aside-1 {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 65px;
+  height: 70px;
   justify-content: center;
   border-bottom: solid 1px #BFBFDD;
 }
 
 h1 {
   color: #FFFFFF;
-  font-size: 19px;
+  font-size: 25px;
   font-weight: 700;
 
   padding: 20px 0;
@@ -42,7 +43,6 @@ h1 {
 .section-aside-2 {
   display: flex;
   flex-direction: column;
-  height: 100px;
   height: 150px;
   justify-content: space-evenly;
   width: 85%;
@@ -50,7 +50,7 @@ h1 {
 
 h2 {
   color: #BFBFDD;
-  font-size: 14px;
+  font-size: 17px;
   width: 85%;
 }
 
@@ -60,7 +60,7 @@ h2 {
   border-top: solid 1px #BFBFDD;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 420px;
   justify-content: space-evenly;
   width: 100%;
 }
@@ -72,18 +72,19 @@ aside ul {
 
 ul {
   color: #ffffff;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 300;
 }
 
 li {
   height: 40px;
-  padding: 9px 8%;
+  padding: 7px 8%;
 }
 
 li:hover {
   background-color: #D14119;
   border-left: solid 10px #F58E72;
+  padding-left: 6%;
 }
 
 li:active {
@@ -111,13 +112,17 @@ aside button {
 }
 
 aside button:hover {
-  background-color: #D14119;
-  border-color: #D14119;
+  background-color: #3c40a3;
+  border-color: #3c40a3;
 }
 
 aside button:active {
-  background-color: #A63414;
-  border-color: #A63414;
+  background-color: #2a2d73;
+  border-color: #2a2d73;
+}
+
+aside button:focus {
+  outline: none;
 }
 
 aside input {
@@ -129,11 +134,15 @@ aside input {
   padding-left: 10px;
 }
 
+aside input:focus {
+  outline: none;
+}
+
 /* Main Section */
 
 main {
   width: 85%;
-  height: 1000px;
+/*  height: 100%;*/
 }
 
 /* Top Section */
