@@ -133,7 +133,7 @@ aside input {
 
 main {
   width: 85%;
-  height: 1000px;
+  height: 100vh;
 }
 
 /* Top Section */
@@ -212,7 +212,7 @@ article {
   grid-gap: 10px 10px;
   justify-items: center;
   background-color: #EAEAF4;
-  height: 250px;
+  height: 100%;
 }
 
 .idea-card {
