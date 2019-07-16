@@ -134,6 +134,10 @@ aside input {
   padding-left: 10px;
 }
 
+aside input:focus {
+  outline: none;
+}
+
 /* Main Section */
 
 main {
