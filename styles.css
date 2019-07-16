@@ -121,6 +121,10 @@ aside button:active {
   border-color: #2a2d73;
 }
 
+aside button:focus {
+  outline: none;
+}
+
 aside input {
   background-color: #E9E9F3;
   height: 40px;
