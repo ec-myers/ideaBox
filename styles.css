@@ -78,10 +78,12 @@ li {
 
 li:hover {
   background-color: #D14119;
+  border-left: solid 10px #F58E72;
 }
 
 li:active {
   background-color: #A63414;
+  border-left: solid 10px #F58E72;
 }
 
 aside form {
