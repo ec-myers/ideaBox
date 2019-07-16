@@ -22,16 +22,21 @@ aside {
 }
 
 .section-aside-1 {
-  width: 85%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 65px;
+  justify-content: center;
+  border-bottom: solid 1px #BFBFDD;
 }
 
 h1 {
-  border-bottom: solid 1px #BFBFDD;
   color: #FFFFFF;
   font-size: 19px;
   font-weight: 700;
-  height: 65px;
+
   padding: 20px 0;
+  width: 85%;
 }
 
 .section-aside-2 {
