@@ -112,10 +112,12 @@ aside button {
 
 aside button:hover {
   background-color: #D14119;
+  border-color: #D14119;
 }
 
 aside button:active {
   background-color: #A63414;
+  border-color: #A63414;
 }
 
 aside input {
