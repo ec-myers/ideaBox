@@ -18,21 +18,22 @@ aside {
   background-color: #1F1F3D;
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 25%;
+  height: 100vh;
 }
 
 .section-aside-1 {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 65px;
+  height: 70px;
   justify-content: center;
   border-bottom: solid 1px #BFBFDD;
 }
 
 h1 {
   color: #FFFFFF;
-  font-size: 19px;
+  font-size: 25px;
   font-weight: 700;
 
   padding: 20px 0;
@@ -42,7 +43,6 @@ h1 {
 .section-aside-2 {
   display: flex;
   flex-direction: column;
-  height: 100px;
   height: 150px;
   justify-content: space-evenly;
   width: 85%;
@@ -50,7 +50,7 @@ h1 {
 
 h2 {
   color: #BFBFDD;
-  font-size: 14px;
+  font-size: 17px;
   width: 85%;
 }
 
@@ -60,7 +60,7 @@ h2 {
   border-top: solid 1px #BFBFDD;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 420px;
   justify-content: space-evenly;
   width: 100%;
 }
@@ -72,18 +72,19 @@ aside ul {
 
 ul {
   color: #ffffff;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 300;
 }
 
 li {
   height: 40px;
-  padding: 9px 8%;
+  padding: 7px 8%;
 }
 
 li:hover {
   background-color: #D14119;
   border-left: solid 10px #F58E72;
+  padding-left: 6%;
 }
 
 li:active {
@@ -111,13 +112,17 @@ aside button {
 }
 
 aside button:hover {
-  background-color: #D14119;
-  border-color: #D14119;
+  background-color: #3c40a3;
+  border-color: #3c40a3;
 }
 
 aside button:active {
-  background-color: #A63414;
-  border-color: #A63414;
+  background-color: #2a2d73;
+  border-color: #2a2d73;
+}
+
+aside button:focus {
+  outline: none;
 }
 
 aside input {
@@ -127,6 +132,10 @@ aside input {
   margin-top: 5px;
   font-size: 16px;
   padding-left: 10px;
+}
+
+aside input:focus {
+  outline: none;
 }
 
 /* Main Section */
@@ -141,7 +150,7 @@ main {
 .section-top {
   display: flex;
   background-color: #A9AAD2;
-  height: 240px;
+  height: 377px;
   justify-content: center;
 }
 
@@ -162,14 +171,14 @@ article {
 .form-title {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
-  height: 27px;
+  height: 50px;
   margin: 5px 0;
 }
 
 .form-body {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
-  height: 55px;
+  height: 100px;
   margin: 5px 0;
 }
 
@@ -179,25 +188,27 @@ article {
   border-radius: 2px;
   color: #ffffff;
   font-size: 14px;
-  height: 27px;
+  height: 50px;
 }
 
 .div-search {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
-  height: 27px;
+  display: flex;
+  height: 50px;
   margin-top: 18px;
   width: 100%;
 }
 
 .section-top img {
   background-color: #1F1F3D;
-  height: 27px;
-  position: absolute;
+  padding: 11px 0px;
+  height: 100%;
 }
 
 .div-search input {
   height: 100%;
+  padding: 5px;
   width: 100%;
 }
 
