@@ -185,6 +185,7 @@ article {
 .div-search {
   border: #1F1F3D solid 1px ;
   border-radius: 2px;
+  display: flex;
   height: 27px;
   margin-top: 18px;
   width: 100%;
@@ -192,12 +193,13 @@ article {
 
 .section-top img {
   background-color: #1F1F3D;
-  height: 27px;
-  position: absolute;
+  padding: 4px;
+  height: 23px;
 }
 
 .div-search input {
   height: 100%;
+  padding: 5px;
   width: 100%;
 }
 
