@@ -22,7 +22,7 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-// cardArea.addEventListener('click', handleBottom);
+cardArea.addEventListener('click', deleteCard);
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
@@ -37,18 +37,19 @@ function repopulateIdeasArray() {
     return new Idea(arrayProp.id, arrayProp.title, arrayProp.body, arrayProp.star, arrayProp.quality);
   });
   ideasArray = newArray;
-  
+
   for (i = 0; i < ideasArray.length; i++) {
     addCard(ideasArray[i]);
   }
 }
 
-function deleteCard() {
-  // if (e.target.id === 'btn-delete'){
-  //   event.target.closest('.idea-card').remove();
-  // }
+function deleteCard(e) {
+    console.log(e);
+  if (e.target.id === 'btn-delete'){
+    e.target.closest('.idea-card').remove();
+  }
 
-	deleteFromStorage()
+	// deleteFromStorage()
 }
 
 function addIdea(e) {
@@ -67,7 +68,7 @@ function handleSaveBtn() {
 }
 
 function addCard(object) {
-	cardArea.insertAdjacentHTML('afterbegin', `<card class="idea-card" data-id="${object.id}">
+	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
@@ -81,5 +82,5 @@ function addCard(object) {
           <p class="quality-text">Quality: ${object.quality}</p>
           <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
-      </card>`);
+      </article>`);
 }
