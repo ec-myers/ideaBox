@@ -33,14 +33,20 @@ window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 // }
 
 function repopulateIdeasArray() {
-  ideasArray = JSON.parse(localStorage.getItem('ideasArray'));
+  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(arrayProp) {
+    return new Idea(arrayProp.id, arrayProp.title, arrayProp.body, arrayProp.star, arrayProp.quality);
+  });
+  ideasArray = newArray;
+  
   for (i = 0; i < ideasArray.length; i++) {
     addCard(ideasArray[i]);
   }
 }
 
 function deleteCard() {
-
+  // if (e.target.id === 'btn-delete'){
+  //   event.target.closest('.idea-card').remove();
+  // }
 
 	deleteFromStorage()
 }
