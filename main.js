@@ -16,16 +16,13 @@ var cardArea = document.querySelector('.section-bottom');
 var ideaArray = []
 var id = Date.now();
 
-// btnDelete.addEventListener('click', );
-// btnDownvote.addEventListener('click', );
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
 // btnQuality.addEventListener('click', );
 btnSave.addEventListener('click', addIdea);
-// btnStar.addEventListener('click', );
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-// btnUpvote.addEventListener('click', );
+
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 
@@ -39,28 +36,29 @@ function addIdea(e) {
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideaArray.push(idea);
 	handleSaveBtn();
-	addCard();
+	addCard(idea);
 	// saveToStorage();
-	// clearInputs();
+	inputTitle.value = "";
+	inputBody.value = "";
 }
 
 function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
-function addCard(idea) {
-	cardArea.insertAdjacentHTML('afterbegin', `<card class="idea-card" data-id="${this.id}">
+function addCard(object) {
+	cardArea.insertAdjacentHTML('afterbegin', `<card class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
-          <h3>${this.title}</h3>
-          <p class="card-text">${this.body}</p>
+          <h3>${object.title}</h3>
+          <p class="card-text">${object.body}</p>
         </div>
         <footer>
           <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${this.quality}</p>
+          <p class="quality-text">Quality: ${object.quality}</p>
           <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </card>`);
