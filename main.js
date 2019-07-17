@@ -22,9 +22,14 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-
+cardArea.addEventListener('click', handleBottom);
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
+
+// handleBottom() {
+// 	if (e.)
+// 		make if functions to target every button/image
+// }
 
 function deleteCard() {
 	// target btn-delete to remove card
