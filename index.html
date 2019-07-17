@@ -17,13 +17,13 @@
      <section class="section-aside-3">
       <h2>Filter by Quality</h2>
       <ul>
-        <li>Swill</li>
-        <li>Plausible</li>
-        <li>Genius</li>
+        <li id="btn-swill">Swill</li>
+        <li id="btn-plausible">Plausible</li>
+        <li id="btn-genius">Genius</li>
       </ul>
       <form>
         <h2>New Quality</h2>
-        <input>
+        <input id="input-quality">
         <button id="btn-quality">Add New Quality</button>
       </form>
      </section>
@@ -33,33 +33,35 @@
       <article>
         <form class="form-top">
           <label>Title</label>
-          <input class="form-title">
+          <input class="form-title" id="input-title">
           <label>Body</label>
-          <input class="form-body">
-          <button id="btn-save">Save</button>
+          <input class="form-body" id="input-body">
+          <button id="btn-save" disabled>Save</button>
         </form>
         <div class="div-search">
           <img src="images/search.svg" alt="search icon">
-          <input type=text, placeholder="Search ideas">
+          <input type=text, placeholder="Search ideas" id="input-search">
         </div>
       </article>
     </section>
     <section class="section-bottom">
-      <card class="idea-card">
+<!--       <card class="idea-card">
         <header>
-          <img class="img-star" src="images/star.svg" alt="white star">
-          <img class="img-delete" src="images/delete.svg" alt="delete">
+          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star">
+          <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
           <h3>Idea title</h3>
           <p class="card-text">Placeholder</p>
         </div>
         <footer>
-          <img src="images/upvote.svg" alt="upvote">
+          <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
           <p class="quality-text">Quality:<span> Swill</span></p>
-          <img src="images/downvote.svg" alt="downvote">          
+          <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
-      </card>
+      </card> -->
     </section>
-  </main>   
+    <script type="text/javascript" src="idea.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </main>
 
