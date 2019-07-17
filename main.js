@@ -12,28 +12,12 @@ var cardArea = document.querySelector('.section-bottom');
 var formArea = document.querySelector('.section-top');
 var asideArea = document.querySelector("aside");
 var ideaArray = [];
-var id = Date.now();
 
-btnSave.addEventListener('click', addIdea);
-inputBody.addEventListener('keyup', handleSaveBtn);
-inputTitle.addEventListener('keyup', handleSaveBtn);
 asideArea.addEventListener('click', handleAsideButtons);
+asideArea.addEventListener('keyup', handleAsideInput);
 cardArea.addEventListener('click', handleCardButtons);
-// formArea.addEventListener('click', handleFormButton)
-
-// ---- optional event delegation for form button ----
-// function handleFormButton(event) {
-//   event.preventDefault();
-//   if (event.target.id === "btn-save") {
-//     var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
-//     ideaArray.push(idea);
-//     handleSaveBtn();
-//     addCard(idea);
-//     // saveToStorage();
-//     inputTitle.value = "";
-//     inputBody.value = "";
-//   }
-// }
+formArea.addEventListener('click', handleFormButton);
+formArea.addEventListener('keyup', handleFormInputs);
 
 function handleAsideButtons(event) {
   event.preventDefault();
@@ -51,6 +35,39 @@ function handleAsideButtons(event) {
   }
   if (event.target.id === "btn-quality") {
     console.log(event);
+  }
+}
+
+function handleAsideInput() {
+  if (event.target.id === "input-quality") {
+    console.log(event);
+  }
+}
+
+function handleFormInputs() {
+  if (event.target.id === "input-title") {
+    console.log(event);
+    toggleSaveBtn()
+  }
+  if (event.target.id === "input-body") {
+    console.log(event);
+    toggleSaveBtn()
+  }
+  if (event.target.id === "input-search") {
+    console.log(event);
+  }
+}
+
+function handleFormButton(event) {
+  event.preventDefault();
+  if (event.target.id === "btn-save") {
+    var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
+    ideaArray.push(idea);
+    addCard(idea);
+    // saveToStorage();
+    inputTitle.value = "";
+    inputBody.value = "";
+    toggleSaveBtn();
   }
 }
 
@@ -75,18 +92,7 @@ function deleteCard() {
 	deleteFromStorage()
 }
 
-function addIdea(e) {
-  e.preventDefault();
-    var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
-    ideaArray.push(idea);
-    handleSaveBtn();
-    addCard(idea);
-    // saveToStorage();
-    inputTitle.value = "";
-    inputBody.value = "";
-}
-
-function handleSaveBtn() {
+function toggleSaveBtn(event) {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
