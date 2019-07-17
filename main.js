@@ -13,7 +13,7 @@ var inputBody = document.querySelector('#input-body');
 // var inputSearch = document.querySelector('#input-search')
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
-var ideaArray = []
+var ideasArray = []
 var id = Date.now();
 
 // btnGenius.addEventListener('click', );
@@ -22,27 +22,36 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-cardArea.addEventListener('click', handleBottom);
+// cardArea.addEventListener('click', handleBottom);
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
+window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
 // handleBottom() {
 // 	if (e.)
 // 		make if functions to target every button/image
 // }
 
+function repopulateIdeasArray() {
+  ideasArray = JSON.parse(localStorage.getItem('ideasArray'));
+  for (i = 0; i < ideasArray.length; i++) {
+    addCard(ideasArray[i]);
+  }
+}
+
 function deleteCard() {
-	// target btn-delete to remove card
+
+
 	deleteFromStorage()
 }
 
 function addIdea(e) {
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
-	ideaArray.push(idea);
+	ideasArray.push(idea);
+	idea.saveToStorage();
 	handleSaveBtn();
 	addCard(idea);
-	// saveToStorage();
 	inputTitle.value = "";
 	inputBody.value = "";
 }

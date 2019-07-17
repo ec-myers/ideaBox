@@ -8,8 +8,10 @@ class Idea {
 	}
 
 	saveToStorage() {
-
+		localStorage.setItem('ideasArray', JSON.stringify(ideasArray));
 	}
+	
+
 
 	deleteFromStorage() {
 
