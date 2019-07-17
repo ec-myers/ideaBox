@@ -47,9 +47,20 @@ function deleteCard(e) {
     console.log(e);
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove();
+    getId(e);
   }
+	// deleteFromStorage();
+}
 
-	// deleteFromStorage()
+function getId(e) {
+  var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
+  // console.log(ideaId);
+  var index = ideasArray.findIndex(function(idea) {
+    console.log('in getId');
+    return parseInt(ideaId) === idea.id
+
+  })
+  ideasArray[index].deleteFromStorage(ideaId)
 }
 
 function addIdea(e) {

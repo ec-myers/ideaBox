@@ -13,8 +13,11 @@ class Idea {
 	
 
 
-	deleteFromStorage() {
+	deleteFromStorage(ideaId) {
 
+  		// var newArray = ideasArray.find(function(idea) {
+    console.log('linked')
+  // })
 	}
 
 	updateIdea() {
@@ -25,3 +28,9 @@ class Idea {
 
 	}
 }
+
+
+// // ideas array.find(function(idea){
+// 	if idea.id === e.target.cloest id
+// return index then delete that shit
+// })
