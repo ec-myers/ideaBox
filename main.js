@@ -21,46 +21,46 @@ formArea.addEventListener('keyup', handleFormInputs);
 
 function handleAsideButtons(event) {
   event.preventDefault();
-  if (event.target.id === "btn-starred") {
+  if (event.target.id === 'btn-starred') {
     console.log(event); // console.logs are just for test and show
   }
-  if (event.target.id === "btn-swill") {
+  if (event.target.id === 'btn-swill') {
     console.log(event);
   } 
-  if (event.target.id === "btn-plausible") {
+  if (event.target.id === 'btn-plausible') {
     console.log(event);
   }
-  if (event.target.id === "btn-genius") {
+  if (event.target.id === 'btn-genius') {
     console.log(event);
   }
-  if (event.target.id === "btn-quality") {
+  if (event.target.id === 'btn-quality') {
     console.log(event);
   }
 }
 
 function handleAsideInput() {
-  if (event.target.id === "input-quality") {
+  if (event.target.id === 'input-quality') {
     console.log(event);
   }
 }
 
 function handleFormInputs() {
-  if (event.target.id === "input-title") {
+  if (event.target.id === 'input-title') {
     console.log(event);
     toggleSaveBtn()
   }
-  if (event.target.id === "input-body") {
+  if (event.target.id === 'input-body') {
     console.log(event);
     toggleSaveBtn()
   }
-  if (event.target.id === "input-search") {
+  if (event.target.id === 'input-search') {
     console.log(event);
   }
 }
 
 function handleFormButton(event) {
   event.preventDefault();
-  if (event.target.id === "btn-save") {
+  if (event.target.id === 'btn-save') {
     var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
     ideaArray.push(idea);
     addCard(idea);
@@ -73,16 +73,16 @@ function handleFormButton(event) {
 
 function handleCardButtons(event) {
   event.preventDefault();
-  if (event.target.id === "btn-star") {
+  if (event.target.id === 'btn-star') {
     console.log(event);
   }
-  if (event.target.id === "btn-delete") {
+  if (event.target.id === 'btn-delete') {
     console.log(event);
   }
-  if (event.target.id === "btn-upvote") {
+  if (event.target.id === 'btn-upvote') {
     console.log(event);
   }
-  if (event.target.id === "btn-downvote") {
+  if (event.target.id === 'btn-downvote') {
     console.log(event);
   }
 }
