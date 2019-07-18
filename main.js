@@ -47,7 +47,7 @@ function deleteCard(e) {
     console.log(e);
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove();
-    getId(e);
+    deleteCardFromStorage(e);
   }
 }
 
