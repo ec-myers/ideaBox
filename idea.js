@@ -10,11 +10,12 @@ class Idea {
 	saveToStorage() {
 		localStorage.setItem('ideasArray', JSON.stringify(ideasArray));
 	}
-	
 
-
-	deleteFromStorage() {
-
+	deleteFromStorage(index) {
+		var newArray = ideasArray.splice(index, 1);
+		console.log(newArray);
+		console.log(id)
+		this.saveToStorage(ideasArray);
 	}
 
 	updateIdea() {
@@ -25,3 +26,4 @@ class Idea {
 
 	}
 }
+
