@@ -7,12 +7,13 @@ class Idea {
 		this.quality = quality;
 	}
 
-	saveToStorage() {
-		localStorage.setItem('ideasArray', JSON.stringify(ideasArray));
+	saveToStorage(array) {
+		localStorage.setItem('ideasArray', JSON.stringify(array));
 	}
 
-	deleteFromStorage(index) {
-		var newArray = ideasArray.splice(index, 1);
+	deleteFromStorage(index, array) {
+		var newArray = array.splice(index, 1);
+		
 		console.log(newArray);
 		console.log(id)
 		this.saveToStorage(ideasArray);

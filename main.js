@@ -54,7 +54,7 @@ function deleteCard(e) {
 function deleteCardFromStorage(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  ideasArray[identifier].deleteFromStorage(identifier);
+  ideasArray[identifier].deleteFromStorage(identifier, ideasArray);
 }
 
 // rename above function, possibly refactor
@@ -63,7 +63,7 @@ function addIdea(e) {
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
-	idea.saveToStorage();
+	idea.saveToStorage(ideasArray);
 	handleSaveBtn();
 	addCard(idea);
 	inputTitle.value = "";
