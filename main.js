@@ -23,7 +23,7 @@ btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
 cardArea.addEventListener('click', deleteCard);
-cardArea.addEventListener('click', updateCard);
+cardArea.addEventListener('focusout', updateCard);
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('blur', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
@@ -81,10 +81,14 @@ function deleteCard(e) {
   }
 }
 
+// function getIndex(e) {
+// }
+
 function deleteCardFromStorage(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
   ideasArray[identifier].deleteFromStorage(identifier, ideasArray);
+  // console.log(ideasArray[identifier].deleteFromStorage(identifier, ideasArray));
 }
 
 // rename above function, possibly refactor
@@ -95,10 +99,12 @@ function handleSaveBtn() {
 
 function updateCard(e) {
   // if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-  var title = e.target.closest('.card-content').querySelector('.card-title');
-  var body = e.target.closest('.card-content').querySelector('.card-body');
-  console.log(title.innerText);
-  console.log(body.innerText);
+  var title = e.target.closest('.card-content').querySelector('.card-title').innerText;
+  console.log(title);
+  var body = e.target.closest('.card-content').querySelector('.card-body').innerText;
+  console.log(body);
+
+
   // document.querySelector(".card-body");
   // console.log(updateCard());
 
