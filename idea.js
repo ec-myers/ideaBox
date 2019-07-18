@@ -10,14 +10,12 @@ class Idea {
 	saveToStorage() {
 		localStorage.setItem('ideasArray', JSON.stringify(ideasArray));
 	}
-	
 
-
-	deleteFromStorage(ideaId) {
-
-  		// var newArray = ideasArray.find(function(idea) {
-    console.log('linked')
-  // })
+	deleteFromStorage(index) {
+		var newArray = ideasArray.splice(index, 1);
+		console.log(newArray);
+		console.log(id)
+		this.saveToStorage(ideasArray);
 	}
 
 	updateIdea() {
@@ -29,8 +27,3 @@ class Idea {
 	}
 }
 
-
-// // ideas array.find(function(idea){
-// 	if idea.id === e.target.cloest id
-// return index then delete that shit
-// })

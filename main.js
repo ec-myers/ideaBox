@@ -49,19 +49,15 @@ function deleteCard(e) {
     e.target.closest('.idea-card').remove();
     getId(e);
   }
-	// deleteFromStorage();
 }
 
-function getId(e) {
+function deleteCardFromStorage(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
-  // console.log(ideaId);
-  var index = ideasArray.findIndex(function(idea) {
-    console.log('in getId');
-    return parseInt(ideaId) === idea.id
-
-  })
-  ideasArray[index].deleteFromStorage(ideaId)
+  var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
+  ideasArray[identifier].deleteFromStorage(identifier);
 }
+
+// rename above function, possibly refactor
 
 function addIdea(e) {
 	e.preventDefault();
