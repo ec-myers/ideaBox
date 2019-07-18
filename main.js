@@ -23,6 +23,7 @@ btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
 cardArea.addEventListener('click', deleteCard);
+cardArea.addEventListener('click', updateCard);
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
@@ -33,9 +34,10 @@ window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 // }
 
 function repopulateIdeasArray() {
-  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(arrayProp) {
-    return new Idea(arrayProp.id, arrayProp.title, arrayProp.body, arrayProp.star, arrayProp.quality);
+  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
+    return new Idea(idea.id, idea.title, idea.body, idea.star, idea.quality);
   });
+
   ideasArray = newArray;
 
   for (i = 0; i < ideasArray.length; i++) {
@@ -44,17 +46,21 @@ function repopulateIdeasArray() {
 }
 
 function deleteCard(e) {
-    console.log(e);
   if (e.target.id === 'btn-delete'){
-    e.target.closest('.idea-card').remove();
-    getId(e);
+    e.target.closest('.idea-card').remove(); 
+    var index = findIdeaIndex(e);
+    ideasArray[index].deleteFromStorage(index);
   }
 }
 
-function deleteCardFromStorage(e) {
+
+function findIdeaIndex(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  ideasArray[identifier].deleteFromStorage(identifier);
+  return identifier;
+}
+
+function deleteCardFromStorage(e) {
 }
 
 // rename above function, possibly refactor
@@ -68,6 +74,19 @@ function addIdea(e) {
 	addCard(idea);
 	inputTitle.value = "";
 	inputBody.value = "";
+}
+
+function updateCard(e) {
+  // if (e.target.className === 'card-title' || e.target.className === 'card-body') {
+  var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
+  var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
+  var index = findIdeaIndex(e);
+
+  ideasArray[index].title = newTitle;
+  ideasArray[index].title = newBody;
+  
+  console.log(title.innerText);
+  console.log(body.innerText);
 }
 
 function handleSaveBtn() {
