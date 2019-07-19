@@ -236,11 +236,18 @@ article {
 
 .section-bottom header {
   background-color: #1F1F3D;
+  display: flex;
   height: 27px;
 }
 
 .img-star {
+  /*background-image: url('images/star-active.svg');*/
   margin-left: 2px;
+}
+
+.img-star-active {
+  position: absolute;
+  padding-left: 2px;
 }
   
 .img-delete {
