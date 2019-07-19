@@ -49,8 +49,8 @@ function addCard(object) {``
   // var starImg = ? 
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star" src="images/star.svg" alt="star" id="btn-star">
-          <img class="img-star-active" src="images/star-active.svg" alt="active star" id="btn-star">
+          <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
+          <img class="img-star star-active" src="images/star-active.svg" alt="active star" id="btn-star-active">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">

@@ -240,12 +240,12 @@ article {
   height: 27px;
 }
 
-.img-star {
+.star {
   /*background-image: url('images/star-active.svg');*/
   margin-left: 2px;
 }
 
-.img-star-active {
+.star-active {
   position: absolute;
   padding-left: 2px;
 }
