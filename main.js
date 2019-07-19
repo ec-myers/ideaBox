@@ -29,7 +29,7 @@ btnSave.addEventListener('click', addIdea);
 // btnSwill.addEventListener('click', );
 // cardArea.addEventListener('click', deleteCard);
 cardArea.addEventListener('focusout', handleFocusOut);
-cardArea.addEventListener('keyup', handleTextEdit);
+cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 inputBody.addEventListener('keyup', handleSaveBtn);
@@ -120,7 +120,7 @@ function handleFocusOut(e) {
 }
 
 function handleTextEdit(e) {
-  if (e.key === 13) {
+  if (e.key === 'Enter') {
     e.target.blur();
     console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
