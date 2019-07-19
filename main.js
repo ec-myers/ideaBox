@@ -14,6 +14,11 @@ var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
+// for (i = 0; i > ideasArray.length; i++) {
+
+//   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
+//   (ideaCard + i).addEventListener('blur', updateCard);
+// }
 var id = Date.now();
 
 // btnGenius.addEventListener('click', );
@@ -22,16 +27,54 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-cardArea.addEventListener('click', deleteCard);
-cardArea.addEventListener('click', updateCard);
-inputBody.addEventListener('keyup', handleSaveBtn);
+// cardArea.addEventListener('click', deleteCard);
+cardArea.addEventListener('focusout', handleFocusOut);
+cardArea.addEventListener('keyup', handleTextEdit);
+cardArea.addEventListener('click', handleCardButtons);
 inputTitle.addEventListener('keyup', handleSaveBtn);
+inputBody.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
 // handleBottom() {
 // 	if (e.)
 // 		make if functions to target every button/image
 // }
+function handleCardButtons(e) {
+  deleteCard(e);
+}
+
+function addIdea(e) {
+  console.log('here!');
+	e.preventDefault();
+	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
+	ideasArray.push(idea);
+	idea.saveToStorage(ideasArray);
+	handleSaveBtn();
+	addCard(idea);
+	inputTitle.value = "";
+	inputBody.value = "";
+}
+
+  handleSaveBtn();
+
+function addCard(object) {
+  var numOfIdeas = ideasArray.length;
+	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
+        <header>
+          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
+          <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
+        </header>
+        <div class="card-content">
+          <h3 class="card-title" contenteditable="true">${object.title}</h3>
+          <p class="card-body" contenteditable="true">${object.body}</p>
+        </div>
+        <footer>
+          <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
+          <p class="quality-text">Quality: ${object.quality}</p>
+          <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
+        </footer>
+      </article>`);
+}
 
 function repopulateIdeasArray() {
   var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
@@ -46,10 +89,11 @@ function repopulateIdeasArray() {
 }
 
 function deleteCard(e) {
+  console.log('inside delete');
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove(); 
     var index = findIdeaIndex(e);
-    ideasArray[index].deleteFromStorage(index);
+    ideasArray[index].deleteFromStorage(index, ideasArray);
   }
 }
 
@@ -60,53 +104,45 @@ function findIdeaIndex(e) {
   return identifier;
 }
 
-function deleteCardFromStorage(e) {
+function handleFocusOut(e) {
+  if (e.target.className === 'card-title' || e.target.className === 'card-body') {
+    console.log("event:", event);
+    var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
+    var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
+    var index = findIdeaIndex(e);
+
+    ideasArray[index].updateIdea(newTitle, newBody);
+    ideasArray[index].saveToStorage(ideasArray);
+    console.log("index:", index);
+    // console.log(title.innerText);
+    // console.log(body.innerText);
+  }
 }
 
-// rename above function, possibly refactor
+function handleTextEdit(e) {
+  if (e.key === 13) {
+    e.target.blur();
+    console.log("event:", event);
+    var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
+    var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
+    var index = findIdeaIndex(e);
 
-function addIdea(e) {
-	e.preventDefault();
-	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
-	ideasArray.push(idea);
-	idea.saveToStorage();
-	handleSaveBtn();
-	addCard(idea);
-	inputTitle.value = "";
-	inputBody.value = "";
-}
-
-function updateCard(e) {
-  // if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-  var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
-  var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-  var index = findIdeaIndex(e);
-
-  ideasArray[index].title = newTitle;
-  ideasArray[index].title = newBody;
-  
-  console.log(title.innerText);
-  console.log(body.innerText);
-}
+    ideasArray[index].updateIdea(newTitle, newBody);
+    ideasArray[index].saveToStorage(ideasArray);
+  }
+ } 
 
 function handleSaveBtn() {
+  console.log("inputTitle", inputTitle.value);
+  console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
-function addCard(object) {
-	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
-        <header>
-          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
-          <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
-        </header>
-        <div class="card-content">
-          <h3>${object.title}</h3>
-          <p class="card-text">${object.body}</p>
-        </div>
-        <footer>
-          <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${object.quality}</p>
-          <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
-        </footer>
-      </article>`);
-}
+  // console.log(title);
+  //return enter key saves changes
+  //assign the new fields to the property values on DOM
+  //get the objects with the changes
+  //update the array to include new changes
+  //pass the array to local storage udpateIdea() to update data model
+
+
