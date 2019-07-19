@@ -5,7 +5,7 @@
 // var btnQuality = document.querySelector('#btn-quality');
 var btnSave = document.querySelector('#btn-save');
 // var btnStar = document.querySelector('#btn-star');
-// var btnStarred = document.querySelector('#btn-starred');
+// var btnStarred = document.querySelector('#btn-star');
 // var btnSwill = document.querySelector('#btn-swill');
 // var btnUpvote = document.querySelector('#btn-upvote');
 var inputBody = document.querySelector('#input-body');
@@ -23,15 +23,16 @@ var id = Date.now();
 
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
-// btnQuality.addEventListener('click', );
+// btnQuality.addEventListener('click', toggleArrow);
 btnSave.addEventListener('click', addIdea);
-// btnStarred.addEventListener('click', );
+cardArea.addEventListener('click', toggleStar);
 // btnSwill.addEventListener('click', );
-// cardArea.addEventListener('click', deleteCard);
+
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
 inputTitle.addEventListener('keyup', handleSaveBtn);
+
 inputBody.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
@@ -55,13 +56,14 @@ function addIdea(e) {
 	inputBody.value = "";
 }
 
-  handleSaveBtn();
+handleSaveBtn();
 
 function addCard(object) {
   var numOfIdeas = ideasArray.length;
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
+          <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
+          <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -97,7 +99,6 @@ function deleteCard(e) {
   }
 }
 
-
 function findIdeaIndex(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
@@ -119,6 +120,13 @@ function handleFocusOut(e) {
   }
 }
 
+function toggleStar(e) {
+  if (e.target.id === 'btn-star') {
+    var on = document.querySelector('.star-active').classList.remove('hidden');
+    var off = document.querySelector('.star').classList.add('hidden');
+  }
+}
+
 function handleTextEdit(e) {
   if (e.key === 'Enter') {
     e.target.blur();
@@ -137,7 +145,6 @@ function handleSaveBtn() {
   console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
-
   // console.log(title);
   //return enter key saves changes
   //assign the new fields to the property values on DOM

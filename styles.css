@@ -325,6 +325,15 @@ article {
     transform: rotate(20deg);
     transition: 0.2s ease-in-out 0s;
 }
+
+.star-active {
+  position: absolute;
+  padding-left: 2px;
+}
+
+.hidden {
+  visibility: hidden;
+}
   
 .img-delete {
   margin-right: 5px;
