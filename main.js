@@ -5,7 +5,7 @@
 // var btnQuality = document.querySelector('#btn-quality');
 var btnSave = document.querySelector('#btn-save');
 // var btnStar = document.querySelector('#btn-star');
-// var btnStarred = document.querySelector('#btn-starred');
+// var btnStarred = document.querySelector('#btn-star');
 // var btnSwill = document.querySelector('#btn-swill');
 // var btnUpvote = document.querySelector('#btn-upvote');
 var inputBody = document.querySelector('#input-body');
@@ -20,7 +20,8 @@ var id = Date.now();
 // btnPlausible.addEventListener('click', );
 // btnQuality.addEventListener('click', );
 btnSave.addEventListener('click', addIdea);
-// btnStarred.addEventListener('click', );
+cardArea.addEventListener('click', toggleStar);
+// console.log(btnStarred());
 // btnSwill.addEventListener('click', );
 cardArea.addEventListener('click', deleteCard);
 cardArea.addEventListener('focusout', updateCard);
@@ -45,9 +46,10 @@ function addIdea(e) {
 }
 
 function addCard(object) {
+  // var starImg = ? 
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
+          <img class="img-star" src="images/star.svg" alt="star" id="btn-star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -108,6 +110,12 @@ function updateCard(e) {
   // document.querySelector(".card-body");
   // console.log(updateCard());
 
+}
+
+function toggleStar(e) {
+  if (e.target.id === 'btn-star'){
+   console.log('IN TOGGLE STAR')
+  }
 }
   // console.log(title);
   //return enter key saves changes
