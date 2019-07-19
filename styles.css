@@ -20,7 +20,7 @@ aside {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 25%;
+  width: 35%;
 }
 
 .section-aside-1:hover,
@@ -164,7 +164,7 @@ aside input {
 main {
   background-color: #1F1F3D;
   height: 100%;
-  width: 85%;
+  width: 100%;
   box-shadow: -5px 0px 15px black
 }
 
@@ -214,8 +214,9 @@ article {
   font-size: 18px;
   height: 100px;
   margin: 5px 0;
-  padding-bottom: 55px;
-  padding-left: 10px;
+  padding-top: 8px;
+  padding-left: 12px;
+  resize: none;
 }
 
 #btn-save {
@@ -428,3 +429,35 @@ span {
   display: flex;
   font-size: 16px;
 }
+
+/* MEDIA QUERIES */
+
+@media (max-width: 775px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside {
+      width: 100%;
+      height: 640px;
+    }
+
+    aside button {
+      font-size: 18px;
+    }
+
+    article {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+        width: 60%;
+    }
+
+    .section-top {
+      height: 420px;
+  }
+}
+
+
+
