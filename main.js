@@ -14,6 +14,11 @@ var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
+// for (i = 0; i > ideasArray.length; i++) {
+
+//   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
+//   (ideaCard + i).addEventListener('blur', updateCard);
+// }
 var id = Date.now();
 
 // btnGenius.addEventListener('click', );
@@ -22,18 +27,24 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 // btnStarred.addEventListener('click', );
 // btnSwill.addEventListener('click', );
-cardArea.addEventListener('click', deleteCard);
-cardArea.addEventListener('click', updateCard);
+// cardArea.addEventListener('click', deleteCard);
+cardArea.addEventListener('focusout', handleFocusOut);
+cardArea.addEventListener('keyup', handleTextEdit);
+cardArea.addEventListener('click', handleCardButtons);
+inputTitle.addEventListener('keyup', handleSaveBtn);
 inputBody.addEventListener('keyup', handleSaveBtn);
-inputTitle.addEventListener('blur', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
 // handleBottom() {
 // 	if (e.)
 // 		make if functions to target every button/image
 // }
+function handleCardButtons(e) {
+  deleteCard(e);
+}
 
 function addIdea(e) {
+  console.log('here!');
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
@@ -44,7 +55,10 @@ function addIdea(e) {
 	inputBody.value = "";
 }
 
+  handleSaveBtn();
+
 function addCard(object) {
+  var numOfIdeas = ideasArray.length;
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star" src="images/star.svg" alt="white star" id="btn-star" id="star">
@@ -63,9 +77,10 @@ function addCard(object) {
 }
 
 function repopulateIdeasArray() {
-  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(arrayProp) {
-    return new Idea(arrayProp.id, arrayProp.title, arrayProp.body, arrayProp.star, arrayProp.quality);
+  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
+    return new Idea(idea.id, idea.title, idea.body, idea.star, idea.quality);
   });
+
   ideasArray = newArray;
 
   for (i = 0; i < ideasArray.length; i++) {
@@ -74,35 +89,55 @@ function repopulateIdeasArray() {
 }
 
 function deleteCard(e) {
-    console.log(e);
+  console.log('inside delete');
   if (e.target.id === 'btn-delete'){
-    e.target.closest('.idea-card').remove();
-    deleteCardFromStorage(e);
+    e.target.closest('.idea-card').remove(); 
+    var index = findIdeaIndex(e);
+    ideasArray[index].deleteFromStorage(index, ideasArray);
   }
 }
 
-function deleteCardFromStorage(e) {
+
+function findIdeaIndex(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  ideasArray[identifier].deleteFromStorage(identifier, ideasArray);
+  return identifier;
 }
 
-// rename above function, possibly refactor
+function handleFocusOut(e) {
+  if (e.target.className === 'card-title' || e.target.className === 'card-body') {
+    console.log("event:", event);
+    var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
+    var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
+    var index = findIdeaIndex(e);
+
+    ideasArray[index].updateIdea(newTitle, newBody);
+    ideasArray[index].saveToStorage(ideasArray);
+    console.log("index:", index);
+    // console.log(title.innerText);
+    // console.log(body.innerText);
+  }
+}
+
+function handleTextEdit(e) {
+  if (e.key === 13) {
+    e.target.blur();
+    console.log("event:", event);
+    var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
+    var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
+    var index = findIdeaIndex(e);
+
+    ideasArray[index].updateIdea(newTitle, newBody);
+    ideasArray[index].saveToStorage(ideasArray);
+  }
+ } 
 
 function handleSaveBtn() {
+  console.log("inputTitle", inputTitle.value);
+  console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
-function updateCard(e) {
-  // if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-  var title = e.target.closest('.card-content').querySelector('.card-title');
-  var body = e.target.closest('.card-content').querySelector('.card-body');
-  console.log(title.innerText);
-  console.log(body.innerText);
-  // document.querySelector(".card-body");
-  // console.log(updateCard());
-
-}
   // console.log(title);
   //return enter key saves changes
   //assign the new fields to the property values on DOM
