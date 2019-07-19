@@ -55,9 +55,9 @@ function addCard(object) {
           <p class="card-body" contenteditable="true">${object.body}</p>
         </div>
         <footer>
-          <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
+          <img class="img-upvote" src="images/upvote.svg" alt="upvote" id="btn-upvote">
           <p class="quality-text">Quality: ${object.quality}</p>
-          <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
+          <img class="img-downvote" src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </article>`);
 }
