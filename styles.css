@@ -219,6 +219,16 @@ article {
   resize: none;
 }
 
+textarea:hover {
+  box-shadow: 0 0 10px gray;
+  transition: 0.25s;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px gray;
+}
+
 #btn-save {
   background-color: #353567;
   border-radius: 2px;
@@ -447,15 +457,19 @@ span {
       font-size: 18px;
     }
 
+    .section-bottom {
+      padding: 20px 35px;
+    }
+
     article {
         display: flex;
         flex-direction: column;
         margin: 20px 0;
-        width: 60%;
+        width: 76%;
     }
 
     .section-top {
-      height: 420px;
+      height: 415px;
   }
 }
 
