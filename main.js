@@ -18,10 +18,9 @@ var id = Date.now();
 
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
-// btnQuality.addEventListener('click', );
+// btnQuality.addEventListener('click', toggleArrow);
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('click', toggleStar);
-// console.log(btnStarred());
 // btnSwill.addEventListener('click', );
 cardArea.addEventListener('click', deleteCard);
 cardArea.addEventListener('focusout', updateCard);
@@ -50,7 +49,7 @@ function addCard(object) {``
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
-          <img class="img-star star-active" src="images/star-active.svg" alt="active star" id="btn-star-active">
+          <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -84,8 +83,6 @@ function deleteCard(e) {
   }
 }
 
-// function getIndex(e) {
-// }
 
 function deleteCardFromStorage(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
@@ -103,21 +100,21 @@ function handleSaveBtn() {
 function updateCard(e) {
   // if (e.target.className === 'card-title' || e.target.className === 'card-body') {
   var title = e.target.closest('.card-content').querySelector('.card-title').innerText;
-  console.log(title);
+
   var body = e.target.closest('.card-content').querySelector('.card-body').innerText;
-  console.log(body);
-
-
-  // document.querySelector(".card-body");
-  // console.log(updateCard());
-
 }
+
 
 function toggleStar(e) {
-  if (e.target.id === 'btn-star'){
-   console.log('IN TOGGLE STAR')
+  if (e.target.id === 'btn-star') {
+    var on = document.querySelector('.star-active').classList.remove('hidden');
+    var off = document.querySelector('.star').classList.add('hidden');
   }
+
 }
+
+
+
   // console.log(title);
   //return enter key saves changes
   //assign the new fields to the property values on DOM

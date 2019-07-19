@@ -221,7 +221,7 @@ article {
   grid-template-rows: auto;
   grid-auto-flow: row;
   grid-gap: 10px 10px;
-  justify-items: center;
+  justify-content: center;
   background-color: #EAEAF4;
   height: 100%;
 }
@@ -237,6 +237,7 @@ article {
 .section-bottom header {
   background-color: #1F1F3D;
   display: flex;
+  justify-content: space-between;
   height: 27px;
 }
 
@@ -248,6 +249,10 @@ article {
 .star-active {
   position: absolute;
   padding-left: 2px;
+}
+
+.hidden {
+  visibility: hidden;
 }
   
 .img-delete {
@@ -271,6 +276,7 @@ h3 {
 span {
   margin-left: 5px;
 }
+
 .section-bottom footer {
   background-color: #5356A4;
   display: flex;
