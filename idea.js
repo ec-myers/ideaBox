@@ -19,8 +19,9 @@ class Idea {
 		this.saveToStorage(ideasArray);
 	}
 
-	updateIdea() {
-
+	updateIdea(title, body) {
+		this.title = title;
+		this.body = body;
 	}
 
 	updateQuality() {
