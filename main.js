@@ -41,7 +41,24 @@ window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 // 		make if functions to target every button/image
 // }
 function handleCardButtons(e) {
+  if (e.target.id === 'btn-upvote') {
+    console.log(e);
+    changeQuality(e);
+  }
+  if (e.target.id === 'btn-downvote') {
+    console.log(e);
+  }
+  if (e.target.id === 'btn-delete') {
   deleteCard(e);
+  }
+}
+
+function incrementQuality(e) {
+  e.target.closest('.idea-card');
+  console.log(e.target.closest(".idea-card"));
+  PLACEHOLDER.quality++
+  // var index = findIdeaIndex(e);
+  // console.log(index);
 }
 
 function addIdea(e) {
@@ -98,6 +115,7 @@ function deleteCard(e) {
     ideasArray[index].deleteFromStorage(index, ideasArray);
   }
 }
+
 
 function findIdeaIndex(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');

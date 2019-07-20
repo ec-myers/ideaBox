@@ -4,7 +4,8 @@ class Idea {
 		this.title = title;
 		this.body = body;
 		this.star = star;
-		this.quality = quality;
+		this.quality = 0;
+		this.qualitiesArray = ["Swill", "Plausible", "Genius"]
 	}
 
 	saveToStorage(array) {
@@ -24,8 +25,10 @@ class Idea {
 		this.body = body;
 	}
 
-	updateQuality() {
-
+	updateQuality(index) {
+		this.incrementQuality();
+		this.quality++;
+		this.decrementQuality();
+		this.quality--;
 	}
 }
-
