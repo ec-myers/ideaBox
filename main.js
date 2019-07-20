@@ -50,10 +50,10 @@ function addIdea(e) {
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
 	idea.saveToStorage(ideasArray);
-	handleSaveBtn();
 	addCard(idea);
 	inputTitle.value = "";
 	inputBody.value = "";
+	handleSaveBtn();
 }
 
 handleSaveBtn();
