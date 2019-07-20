@@ -42,23 +42,41 @@ window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 // }
 function handleCardButtons(e) {
   if (e.target.id === 'btn-upvote') {
-    console.log(e);
-    changeQuality(e);
+    upvoteQuality(e);
   }
   if (e.target.id === 'btn-downvote') {
-    console.log(e);
+    downvoteQuality(e);
   }
   if (e.target.id === 'btn-delete') {
-  deleteCard(e);
+    deleteCard(e);
   }
 }
 
-function incrementQuality(e) {
+function upvoteQuality(e) {
   e.target.closest('.idea-card');
-  console.log(e.target.closest(".idea-card"));
-  PLACEHOLDER.quality++
-  // var index = findIdeaIndex(e);
-  // console.log(index);
+  var index = findIdeaIndex(e);
+  if (ideasArray[index].quality < ideasArray[index].qualitiesArray.length - 1) {
+  var newQuality = ideasArray[index].quality + 1;
+  ideasArray[index].updateQuality(newQuality);
+  qualityDisplay(e);
+  }
+}
+
+function downvoteQuality(e) {
+  e.target.closest('.idea-card');
+  var index = findIdeaIndex(e);
+  if (ideasArray[index].quality > 0) {
+  var newQuality = ideasArray[index].quality - 1;
+  ideasArray[index].updateQuality(newQuality);
+  qualityDisplay(e)
+  }
+}
+
+function qualityDisplay(e) {
+  var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
+  var index = findIdeaIndex(e);
+  var ideaQuality = ideasArray[index].userQuality;
+  qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
 function addIdea(e) {
@@ -67,10 +85,10 @@ function addIdea(e) {
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
 	idea.saveToStorage(ideasArray);
-	handleSaveBtn();
 	addCard(idea);
 	inputTitle.value = "";
 	inputBody.value = "";
+	handleSaveBtn();
 }
 
 handleSaveBtn();
@@ -89,7 +107,7 @@ function addCard(object) {
         </div>
         <footer>
           <img class="img-upvote" src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${object.quality}</p>
+          <p class="quality-text">Quality: ${object.userQuality}</p>
           <img class="img-downvote" src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </article>`);
@@ -159,8 +177,8 @@ function handleTextEdit(e) {
  } 
 
 function handleSaveBtn() {
-  console.log("inputTitle", inputTitle.value);
-  console.log("inputBody", inputBody.value);
+  // console.log("inputTitle", inputTitle.value);
+  // console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
   // console.log(title);
