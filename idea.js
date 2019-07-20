@@ -3,8 +3,8 @@ class Idea {
 		this.id = id;
 		this.title = title;
 		this.body = body;
-		this.star = star;
-		this.quality = quality;
+		this.star = star || false;
+		this.quality = quality || 0;
 	}
 
 	saveToStorage(array) {
@@ -22,6 +22,10 @@ class Idea {
 	updateIdea(title, body) {
 		this.title = title;
 		this.body = body;
+	}
+
+	updateStar() {
+		this.star = !this.star;
 	}
 
 	updateQuality() {
