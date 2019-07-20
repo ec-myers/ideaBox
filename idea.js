@@ -6,6 +6,7 @@ class Idea {
 		this.star = star;
 		this.quality = 0;
 		this.qualitiesArray = ["Swill", "Plausible", "Genius"]
+		this.userQuality = this.qualitiesArray[this.quality];
 	}
 
 	saveToStorage(array) {
@@ -25,10 +26,10 @@ class Idea {
 		this.body = body;
 	}
 
-	updateQuality(index) {
-		this.incrementQuality();
-		this.quality++;
-		this.decrementQuality();
-		this.quality--;
+	updateQuality(quality) {
+		this.quality = quality;
+		this.userQuality = this.qualitiesArray[this.quality];
 	}
 }
+
+    // if (ideasArray[index].quality <== ideasArray[index].length) {
