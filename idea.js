@@ -13,15 +13,14 @@ class Idea {
 
 	deleteFromStorage(index, array) {
 		var newArray = array.splice(index, 1);
-		
-		console.log(newArray);
-		console.log(id)
 		this.saveToStorage(ideasArray);
 	}
 
-	updateIdea(title, body) {
+	updateIdea(title, body, star) {
 		this.title = title;
 		this.body = body;
+		this.star = star;
+		console.log(this.star);
 	}
 
 	updateStar() {

@@ -59,10 +59,11 @@ function addIdea(e) {
 handleSaveBtn();
 
 function addCard(object) {
+  var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
   var numOfIdeas = ideasArray.length;
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
+          <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -92,7 +93,6 @@ function repopulateIdeasArray() {
 }
 
 function deleteCard(e) {
-  console.log('inside delete');
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove(); 
     var index = findIdeaIndex(e);
@@ -108,14 +108,12 @@ function findIdeaIndex(e) {
 
 function handleFocusOut(e) {
   if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
     var index = findIdeaIndex(e);
 
     ideasArray[index].updateIdea(newTitle, newBody);
     ideasArray[index].saveToStorage(ideasArray);
-    console.log("index:", index);
     // console.log(title.innerText);
     // console.log(body.innerText);
   }
@@ -125,10 +123,12 @@ function toggleStar(e) {
   if(event.target.classList.contains('img-star')) {
     var getIdea = ideasArray[findIdeaIndex(e)];
     getIdea.updateStar();
-
     var changeStar = getIdea.star ? 'images/star-active.svg' : 'images/star.svg';
-
     event.target.setAttribute('src', changeStar);
+
+   var index = findIdeaIndex(e);
+   console.log(ideasArray[index]);
+    ideasArray[index].saveToStorage(ideasArray);
 
   }
 
@@ -152,8 +152,6 @@ function handleTextEdit(e) {
  } 
 
 function handleSaveBtn() {
-  console.log("inputTitle", inputTitle.value);
-  console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
   // console.log(title);
