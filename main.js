@@ -120,6 +120,14 @@ function handleFocusOut(e) {
   }
 }
 
+function changeStarColor(e, idea){
+    if (idea.star === true) {
+      e.target.closest('.idea-card').querySelector('.img-star').src='images/star-active.svg';
+    } else {
+      e.target.closest('.idea-card').querySelector('.img-star').src='images/star.svg';
+    }
+}
+
     // var on = document.querySelector('.star-active').classList.remove('hidden');
     // var off = document.querySelector('.star').classList.add('hidden');
 
@@ -129,6 +137,7 @@ function toggleStar(e) {
 
     ideasArray[index].updateStar();
     ideasArray[index].saveToStorage(ideasArray);
+    changeStarColor(e, ideasArray[index]);
   }
 }
 
