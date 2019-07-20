@@ -25,7 +25,7 @@ var id = Date.now();
 // btnPlausible.addEventListener('click', );
 // btnQuality.addEventListener('click', toggleArrow);
 btnSave.addEventListener('click', addIdea);
-cardArea.addEventListener('click', toggleStar);
+// cardArea.addEventListener('click', toggleStar);
 // btnSwill.addEventListener('click', );
 
 cardArea.addEventListener('focusout', handleFocusOut);
@@ -42,21 +42,21 @@ window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 // }
 function handleCardButtons(e) {
   deleteCard(e);
+  toggleStar(e);
 }
 
 function addIdea(e) {
   console.log('here!');
 	e.preventDefault();
-	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
+	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value);
 	ideasArray.push(idea);
 	idea.saveToStorage(ideasArray);
-	handleSaveBtn();
 	addCard(idea);
 	inputTitle.value = "";
 	inputBody.value = "";
+	handleSaveBtn();
 }
 
-handleSaveBtn();
 
 function addCard(object) {
   var numOfIdeas = ideasArray.length;
@@ -120,10 +120,15 @@ function handleFocusOut(e) {
   }
 }
 
+    // var on = document.querySelector('.star-active').classList.remove('hidden');
+    // var off = document.querySelector('.star').classList.add('hidden');
+
 function toggleStar(e) {
   if (e.target.id === 'btn-star') {
-    var on = document.querySelector('.star-active').classList.remove('hidden');
-    var off = document.querySelector('.star').classList.add('hidden');
+    var index = findIdeaIndex(e);
+
+    ideasArray[index].updateStar();
+    ideasArray[index].saveToStorage(ideasArray);
   }
 }
 
