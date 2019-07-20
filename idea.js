@@ -31,5 +31,3 @@ class Idea {
 		this.userQuality = this.qualitiesArray[this.quality];
 	}
 }
-
-    // if (ideasArray[index].quality <== ideasArray[index].length) {
