@@ -56,8 +56,6 @@ function addIdea(e) {
 	handleSaveBtn();
 }
 
-handleSaveBtn();
-
 function addCard(object) {
   var numOfIdeas = ideasArray.length;
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
