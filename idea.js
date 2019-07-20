@@ -4,7 +4,7 @@ class Idea {
 		this.title = title;
 		this.body = body;
 		this.star = star;
-		this.quality = 0;
+		this.quality = quality;
 		this.qualitiesArray = ["Swill", "Plausible", "Genius"]
 		this.userQuality = this.qualitiesArray[this.quality];
 	}
