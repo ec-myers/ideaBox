@@ -32,7 +32,7 @@ cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
 inputTitle.addEventListener('keyup', handleSaveBtn);
-
+// do we want to change these keyups to blur?
 inputBody.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
@@ -63,7 +63,6 @@ function addCard(object) {
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
-          <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -77,6 +76,8 @@ function addCard(object) {
         </footer>
       </article>`);
 }
+
+          // <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
 
 function repopulateIdeasArray() {
   var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
@@ -121,11 +122,21 @@ function handleFocusOut(e) {
 }
 
 function toggleStar(e) {
-  if (e.target.id === 'btn-star') {
-    var on = document.querySelector('.star-active').classList.remove('hidden');
-    var off = document.querySelector('.star').classList.add('hidden');
+  if(event.target.classList.contains('img-star')) {
+    var getIdea = ideasArray[findIdeaIndex(e)];
+    getIdea.updateStar();
+
+    var changeStar = getIdea.star ? 'images/star-active.svg' : 'images/star.svg';
+
+    event.target.setAttribute('src', changeStar);
+
   }
-}
+
+// if the src of the image is false, use default image
+// if the src of the image is true, use active image
+  }
+
+
 
 function handleTextEdit(e) {
   if (e.key === 'Enter') {

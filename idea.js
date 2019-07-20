@@ -3,7 +3,7 @@ class Idea {
 		this.id = id;
 		this.title = title;
 		this.body = body;
-		this.star = star;
+		this.star = star || false;
 		this.quality = quality;
 	}
 
@@ -22,6 +22,10 @@ class Idea {
 	updateIdea(title, body) {
 		this.title = title;
 		this.body = body;
+	}
+
+	updateStar() {
+		this.star = !this.star;
 	}
 
 	updateQuality() {
