@@ -1,24 +1,25 @@
-// var btnDelete = document.querySelector('#btn-delete');
-// var btnDownvote = document.querySelector('#btn-downvote');
 // var btnGenius = document.querySelector('#btn-genius');
 // var btnPlausible = document.querySelector('#btn-plausible');
 // var btnQuality = document.querySelector('#btn-quality');
 var btnSave = document.querySelector('#btn-save');
 // var btnStar = document.querySelector('#btn-star');
-// var btnStarred = document.querySelector('#btn-star');
+// var btnStarred = document.querySelector('#btn-starred');
 // var btnSwill = document.querySelector('#btn-swill');
-// var btnUpvote = document.querySelector('#btn-upvote');
 var inputBody = document.querySelector('#input-body');
 // var inputQuality = document.querySelector('#input-quality');
 // var inputSearch = document.querySelector('#input-search')
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
+var id = Date.now();
+var qualitiesArray = ["Swill", "Plausible", "Genius"];
+
+
 // for (i = 0; i > ideasArray.length; i++) {
 //   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
 //   (ideaCard + i).addEventListener('blur', updateCard);
 // }
-var id = Date.now();
+
 
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
@@ -72,7 +73,7 @@ function addCard(object) {
         </div>
         <footer>
           <img class="img-upvote" src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${object.qualitiesArray[object.quality]}</p>
+          <p class="quality-text">Quality: ${qualitiesArray[object.quality]}</p>
           <img class="img-downvote" src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </article>`);
@@ -93,7 +94,7 @@ function repopulateIdeasArray() {
 function upvoteQuality(e) {
   e.target.closest('.idea-card');
   var index = findIdeaIndex(e);
-  if (ideasArray[index].quality < ideasArray[index].qualitiesArray.length - 1) {
+  if (ideasArray[index].quality < qualitiesArray.length - 1) {
   var newQuality = ideasArray[index].quality + 1;
   ideasArray[index].updateQuality(newQuality);
   qualityDisplay(e);
@@ -115,7 +116,7 @@ function downvoteQuality(e) {
 function qualityDisplay(e) {
   var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
   var index = findIdeaIndex(e);
-  var ideaQuality = ideasArray[index].qualitiesArray[ideasArray[index].quality];
+  var ideaQuality = qualitiesArray[ideasArray[index].quality];
   qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
