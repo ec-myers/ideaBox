@@ -311,7 +311,7 @@ textarea:focus {
 .idea-card {
   box-shadow: 0 0 10px #666666;
   width: 100%;
-  border: solid 4px #5356A4;
+  border: solid 3px #5356A4;
 }
 
 .idea-card:hover {
@@ -466,8 +466,8 @@ span {
     }
 
     h1 {
-        width: 298px;
         font-size: 40px;
+        width: 298px;
     }
 
     aside button {
