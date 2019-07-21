@@ -16,11 +16,9 @@ class Idea {
 		this.saveToStorage(ideasArray);
 	}
 
-	updateIdea(title, body, star) {
+	updateIdea(title, body) {
 		this.title = title;
 		this.body = body;
-		this.star = star;
-		console.log(this.star);
 	}
 
 	updateStar() {

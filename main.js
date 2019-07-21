@@ -78,7 +78,6 @@ function addCard(object) {
       </article>`);
 }
 
-          // <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
 
 function repopulateIdeasArray() {
   var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
@@ -114,8 +113,6 @@ function handleFocusOut(e) {
 
     ideasArray[index].updateIdea(newTitle, newBody);
     ideasArray[index].saveToStorage(ideasArray);
-    // console.log(title.innerText);
-    // console.log(body.innerText);
   }
 }
 
@@ -131,12 +128,7 @@ function toggleStar(e) {
     ideasArray[index].saveToStorage(ideasArray);
 
   }
-
-// if the src of the image is false, use default image
-// if the src of the image is true, use active image
-  }
-
-
+}
 
 function handleTextEdit(e) {
   if (e.key === 'Enter') {
@@ -154,11 +146,6 @@ function handleTextEdit(e) {
 function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
-  // console.log(title);
-  //return enter key saves changes
-  //assign the new fields to the property values on DOM
-  //get the objects with the changes
-  //update the array to include new changes
-  //pass the array to local storage udpateIdea() to update data model
+
 
 
