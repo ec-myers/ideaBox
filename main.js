@@ -13,14 +13,7 @@ var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
 var id = Date.now();
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
-
-
-// for (i = 0; i > ideasArray.length; i++) {
-//   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
-//   (ideaCard + i).addEventListener('blur', updateCard);
-// }
-
-
+var btnMenu = document.querySelector('.icons-backdrop');
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
 // btnQuality.addEventListener('click', toggleArrow);
@@ -28,10 +21,11 @@ var qualitiesArray = ["Swill", "Plausible", "Genius"];
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('click', handleCardButtons);
 cardArea.addEventListener('click', toggleStar);
+// btnSwill.addEventListener('click', );
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
-inputTitle.addEventListener('keyup', handleSaveBtn);
+btnMenu.addEventListener('click', toggleMenu)
 // do we want to change these keyups to blur?
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
@@ -179,3 +173,22 @@ function handleTextEdit(e) {
 function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
+
+function toggleMenu(e) {
+  var btnMenu = document.querySelector('.icons-backdrop');
+  var classes = ["show-aside", "hide-aside"]
+  var iconOne = ["burger-icon-1", "x-icon-1"]
+  var iconTwo = ["burger-icon-1", "x-icon-2"]
+  var iconThree = ["burger-icon-1", "x-icon-3"]
+
+  function animationLoop(classChange, element) {
+    for (var i = 0; i < classChange.length; i++){
+    document.querySelector(element).classList.toggle(classChange[i])
+    }
+  }
+
+  animationLoop(classes, 'aside');
+  animationLoop(iconOne, '#burger-icon-1');
+  animationLoop(iconTwo, '#burger-icon-2');
+  animationLoop(iconThree, '#burger-icon-3');
+  }

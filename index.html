@@ -5,64 +5,73 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-  <aside>
-    <section class="section-aside-1">
+  <body>
+    <div class="mobile-header">
       <h1>IdeaBox Redux</h1>
-     </section>
-     <section class="section-aside-2">
-      <h2>Filter Starred Ideas</h2>
-      <button id="btn-starred">Show Starred Ideas</button>
-     </section> 
-     <section class="section-aside-3">
-      <h2>Filter by Quality</h2>
-      <ul>
-        <li id="btn-swill">Swill</li>
-        <li id="btn-plausible">Plausible</li>
-        <li id="btn-genius">Genius</li>
-      </ul>
-      <form>
-        <h2>New Quality</h2>
-        <input id="input-quality">
-        <button id="btn-quality">Add New Quality</button>
-      </form>
-     </section>
-    </aside>
-  <main>
-    <section class="section-top">
-      <article>
-        <form class="form-top">
-          <label>Title</label>
-          <input class="form-title" id="input-title">
-          <label>Body</label>
-          <textarea class="form-body" id="input-body"></textarea>
-          <button id="btn-save" disabled>Save</button>
+      <div class="icons-backdrop">
+        <div class= "burger-icon-1" id="burger-icon-1"></div>
+        <div class= "burger-icon-1" id="burger-icon-2"></div>
+        <div class= "burger-icon-1" id="burger-icon-3"></div>
+      </div>
+    </div>
+    <aside class="hide-aside">
+      <section class="section-aside-1">
+        <h1>IdeaBox Redux</h1>
+      </section>
+      <section class="section-aside-2">
+        <h2>Filter Starred Ideas</h2>
+        <button id="btn-starred">Show Starred Ideas</button>
+      </section> 
+      <section class="section-aside-3">
+        <h2>Filter by Quality</h2>
+        <ul>
+          <li id="btn-swill">Swill</li>
+          <li id="btn-plausible">Plausible</li>
+          <li id="btn-genius">Genius</li>
+        </ul>
+        <form>
+          <h2>New Quality</h2>
+          <input id="input-quality">
+          <button id="btn-quality">Add New Quality</button>
         </form>
-        <div class="div-search">
-          <img src="images/search.svg" alt="search icon">
-          <input type="search", placeholder="Search ideas" id="input-search">
-        </div>
-      </article>
-    </section>
-    <section class="section-bottom">
-      <p>Your next idea goes here!</p>
-<!--       <card class="idea-card">
-        <header>
-          <img class="img-star" src="images/star.svg" alt="white star" id="btn-star">
-          <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
-        </header>
-        <div class="card-content">
-          <h3>Idea title</h3>
-          <p class="card-text">Placeholder</p>
-        </div>
-        <footer>
-          <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality:<span> Swill</span></p>
-          <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
-        </footer>
-      </card> -->
-    </section>
+      </section>
+    </aside>
+    <main>
+      <section class="section-top">
+        <article>
+          <form class="form-top">
+            <label>Title</label>
+            <input class="form-title" id="input-title">
+            <label>Body</label>
+            <textarea class="form-body" id="input-body"></textarea>
+            <button id="btn-save" disabled>Save</button>
+          </form>
+          <div class="div-search">
+            <img src="images/search.svg" alt="search icon">
+            <input type=text, placeholder="Search ideas" id="input-search">
+          </div>
+        </article>
+      </section>
+      <section class="section-bottom">
+        <p>Your next idea goes here!</p>
+  <!--       <card class="idea-card">
+          <header>
+            <img class="img-star" src="images/star.svg" alt="white star" id="btn-star">
+            <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
+          </header>
+          <div class="card-content">
+            <h3>Idea title</h3>
+            <p class="card-text">Placeholder</p>
+          </div>
+          <footer>
+            <img src="images/upvote.svg" alt="upvote" id="btn-upvote">
+            <p class="quality-text">Quality:<span> Swill</span></p>
+            <img src="images/downvote.svg" alt="downvote" id="btn-downvote">    
+          </footer>
+        </card> -->
+      </section>
+    </main>
     <script type="text/javascript" src="idea.js"></script>
     <script type="text/javascript" src="main.js"></script>
-  </main>
-
+  </body>
+</html>
