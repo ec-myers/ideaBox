@@ -24,8 +24,7 @@ class Idea {
 		this.body = body;
 	}
 
-	updateQuality() {
-
+	updateQuality(quality) {
+		this.quality = quality;
 	}
 }
-
