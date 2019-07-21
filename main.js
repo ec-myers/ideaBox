@@ -150,11 +150,23 @@ function handleSaveBtn() {
   //update the array to include new changes
   //pass the array to local storage udpateIdea() to update data model
 
+
 function toggleMenu(e) {
   var btnMenu = document.querySelector('.icons-backdrop');
   var classes = ["show-aside", "hide-aside"]
-  for (var i = 0; i < classes.length; i++){
-    document.querySelector('aside').classList.toggle(classes[i])
+  var iconOne = ["burger-icon-1", "x-icon-1"]
+  var iconTwo = ["burger-icon-1", "x-icon-2"]
+  var iconThree = ["burger-icon-1", "x-icon-3"]
+
+  function animationLoop(classChange, element) {
+    for (var i = 0; i < classChange.length; i++){
+    document.querySelector(element).classList.toggle(classChange[i])
+    }
   }
-}
+
+  animationLoop(classes, 'aside');
+  animationLoop(iconOne, '#burger-icon-1');
+  animationLoop(iconTwo, '#burger-icon-2');
+  animationLoop(iconThree, '#burger-icon-3');
+  }
 
