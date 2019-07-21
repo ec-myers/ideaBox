@@ -30,6 +30,9 @@ cardArea.addEventListener('click', handleCardButtons);
 cardArea.addEventListener('click', toggleStar);
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
+cardArea.addEventListener('click', handleCardButtons);
+inputTitle.addEventListener('keyup', handleSaveBtn);
+// do we want to change these keyups to blur?
 inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
@@ -60,11 +63,11 @@ function addIdea(e) {
 }
 
 function addCard(object) {
+  var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
   var numOfIdeas = ideasArray.length;
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star star" src="images/star.svg" alt="star" id="btn-star">
-          <img class="img-star star-active hidden" src="images/star-active.svg" alt="active star" id="btn-star-active">
+          <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -78,6 +81,7 @@ function addCard(object) {
         </footer>
       </article>`);
 }
+
 
 function repopulateIdeasArray() {
   var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
@@ -121,7 +125,6 @@ function qualityDisplay(e) {
 }
 
 function deleteCard(e) {
-  console.log('inside delete');
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove(); 
     var index = findIdeaIndex(e);
@@ -137,21 +140,26 @@ function findIdeaIndex(e) {
 
 function handleFocusOut(e) {
   if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
     var index = findIdeaIndex(e);
 
     ideasArray[index].updateIdea(newTitle, newBody);
     ideasArray[index].saveToStorage(ideasArray);
-    console.log("index:", index);
   }
 }
 
 function toggleStar(e) {
-  if (e.target.id === 'btn-star') {
-    var on = document.querySelector('.star-active').classList.remove('hidden');
-    var off = document.querySelector('.star').classList.add('hidden');
+  if(e.target.classList.contains('img-star')) {
+    var getIdea = ideasArray[findIdeaIndex(e)];
+    getIdea.updateStar();
+    var changeStar = getIdea.star ? 'images/star-active.svg' : 'images/star.svg';
+    e.target.setAttribute('src', changeStar);
+
+   var index = findIdeaIndex(e);
+
+    ideasArray[index].saveToStorage(ideasArray);
+
   }
 }
 
@@ -171,10 +179,3 @@ function handleTextEdit(e) {
 function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
-
-  // console.log(title);
-  //return enter key saves changes
-  //assign the new fields to the property values on DOM
-  //get the objects with the changes
-  //update the array to include new changes
-  //pass the array to local storage udpateIdea() to update data model

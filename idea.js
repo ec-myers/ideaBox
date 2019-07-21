@@ -3,7 +3,7 @@ class Idea {
 		this.id = id;
 		this.title = title;
 		this.body = body;
-		this.star = star;
+		this.star = star || false;
 		this.quality = quality;
 	}
 
@@ -13,9 +13,6 @@ class Idea {
 
 	deleteFromStorage(index, array) {
 		var newArray = array.splice(index, 1);
-		
-		console.log(newArray);
-		console.log(id)
 		this.saveToStorage(ideasArray);
 	}
 
@@ -24,7 +21,12 @@ class Idea {
 		this.body = body;
 	}
 
+	updateStar() {
+		this.star = !this.star;
+	}
+
 	updateQuality(quality) {
 		this.quality = quality;
+
 	}
 }
