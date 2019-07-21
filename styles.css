@@ -49,7 +49,7 @@ h1 {
 
 h1:hover {
   color: #ff5d30;
-  transition: 0.25s ease-in-out 0s;
+  transition: 0.25s;
 }
 
 .section-aside-2 {
@@ -161,6 +161,9 @@ aside input {
   border: solid 2px #5356A4;
 }
 
+.btn-menu {
+  visibility: hidden;
+}
 /* Main Section */
 
 main {
@@ -337,7 +340,7 @@ textarea:focus {
 
 .img-star:hover {
     transform: rotate(20deg);
-    transition: 0.2s ease-in-out 0s;
+    transition: 0.2s;
 }
 
 .star-active {
@@ -355,7 +358,7 @@ textarea:focus {
 
 .img-delete:hover {
   transform: rotate(-20deg);
-  transition: 0.2s ease-in-out 0s;
+  transition: 0.2s;
 }
 
 .img-downvote {
@@ -364,7 +367,7 @@ textarea:focus {
 
 .img-downvote:hover {
   transform: translate(0px, 2px);
-  transition: 0.2s ease-in-out 0s;
+  transition: 0.2s;
 }
 
 .img-upvote {
@@ -373,7 +376,7 @@ textarea:focus {
 
 .img-upvote:hover {
   transform: translate(0px, -2px);
-  transition: 0.2s ease-in-out 0s;
+  transition: 0.2s;
 }
 
 .card-content {
@@ -461,8 +464,28 @@ span {
     }
 
     aside {
+      position: fixed;
       width: 100%;
-      height: 640px;
+      height: 100vh;
+      z-index: 15;
+    }
+
+    .section-aside-1:hover,
+    .section-aside-2:hover,
+    .section-aside-3:hover {
+      background-color: #1F1F3D;
+}
+
+    .show-aside {
+      right: 0vh;
+      transition: 1s;
+      transition-timing-function: ease-in-out 1s;
+    }
+
+    .hide-aside {
+      right: 100vh;
+      transition: 1s;
+      transition-timing-function: ease-in-out 1s;
     }
 
     h1 {
@@ -474,18 +497,57 @@ span {
       font-size: 18px;
     }
 
-    .section-bottom {
-      padding: 20px 35px;
+    .section-aside-3 {
+      border-bottom: 0;
     }
 
-    article {
-        display: flex;
-        flex-direction: column;
-        margin: 20px 0;
-        width: 76%;
+    .burger-icon {
+      background-color: white;
+      border-radius: 5px;
+      height: 4px;
+      margin: 4px 0;
+      width: 40px;
+    }
+
+    .icons-backdrop {
+      align-items: center;
+      background-color: #A9AAD2;
+      border-radius: 100%;
+      bottom: 25px;
+      box-shadow: 0 0 6px black;
+      display: flex;
+      flex-direction: column;
+      height: 80px;
+      justify-content: center;
+      position: fixed;
+      right: 30px;
+      width: 80px;
+      z-index: 16;
+    }
+
+    .icons-backdrop:hover {
+      background-color: #5356A4;
+      transition: 0.25s;
+    }
+
+    .icons-backdrop:active {
+      background-color: #ff5e7e;
+      transition: 0.25s;
     }
 
     .section-top {
       height: 415px;
-  }
+    }
+
+    article {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0;
+      width: 76%;
+    }
+
+    .section-bottom {
+      padding: 20px 35px;
+    }
+
 }
