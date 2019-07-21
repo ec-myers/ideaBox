@@ -33,6 +33,7 @@ inputBody.addEventListener('keyup', handleSaveBtn);
 inputTitle.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
+
 function handleCardButtons(e) {
   if (e.target.id === 'btn-upvote') {
     upvoteQuality(e);
@@ -43,13 +44,6 @@ function handleCardButtons(e) {
   if (e.target.id === 'btn-delete') {
     deleteCard(e);
   }
-}
-
-function qualityDisplay(e) {
-  var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
-  var index = findIdeaIndex(e);
-  var ideaQuality = ideasArray[index].userQuality;
-  qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
 function addIdea(e) {
@@ -78,7 +72,7 @@ function addCard(object) {
         </div>
         <footer>
           <img class="img-upvote" src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${object.userQuality}</p>
+          <p class="quality-text">Quality: ${object.qualitiesArray[object.quality]}</p>
           <img class="img-downvote" src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </article>`);
@@ -116,6 +110,13 @@ function downvoteQuality(e) {
   qualityDisplay(e)
   ideasArray[index].saveToStorage(ideasArray);
   }
+}
+
+function qualityDisplay(e) {
+  var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
+  var index = findIdeaIndex(e);
+  var ideaQuality = ideasArray[index].qualitiesArray[ideasArray[index].quality];
+  qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
 function deleteCard(e) {

@@ -6,7 +6,6 @@ class Idea {
 		this.star = star;
 		this.quality = quality;
 		this.qualitiesArray = ["Swill", "Plausible", "Genius"]
-		this.userQuality = this.qualitiesArray[this.quality];
 	}
 
 	saveToStorage(array) {
@@ -28,6 +27,5 @@ class Idea {
 
 	updateQuality(quality) {
 		this.quality = quality;
-		this.userQuality = this.qualitiesArray[this.quality];
 	}
 }
