@@ -117,14 +117,14 @@ function handleFocusOut(e) {
 }
 
 function toggleStar(e) {
-  if(event.target.classList.contains('img-star')) {
+  if(e.target.classList.contains('img-star')) {
     var getIdea = ideasArray[findIdeaIndex(e)];
     getIdea.updateStar();
     var changeStar = getIdea.star ? 'images/star-active.svg' : 'images/star.svg';
-    event.target.setAttribute('src', changeStar);
+    e.target.setAttribute('src', changeStar);
 
    var index = findIdeaIndex(e);
-   console.log(ideasArray[index]);
+
     ideasArray[index].saveToStorage(ideasArray);
 
   }
