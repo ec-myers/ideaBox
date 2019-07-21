@@ -5,7 +5,8 @@ var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
-var btnMenu = document.querySelector('.icons-backdrop');
+var btnMenu = document.querySelector('#icons-background');
+
 
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
@@ -163,7 +164,8 @@ function handleSaveBtn() {
 }
 
 function toggleMenu(e) {
-  var btnMenu = document.querySelector('.icons-backdrop');
+  var btnMenu = document.querySelector('#icons-background');
+  var iconBackground = ["icons-backdrop-show", "icons-backdrop-hide"]
   var classes = ["show-aside", "hide-aside"]
   var iconOne = ["burger-icon-1", "x-icon-1"]
   var iconTwo = ["burger-icon-1", "x-icon-2"]
@@ -175,6 +177,7 @@ function toggleMenu(e) {
     }
   }
 
+  animationLoop(iconBackground, '#icons-background')
   animationLoop(classes, 'aside');
   animationLoop(iconOne, '#burger-icon-1');
   animationLoop(iconTwo, '#burger-icon-2');
