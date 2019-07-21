@@ -466,7 +466,7 @@ span {
     aside {
       position: fixed;
       width: 100%;
-      height: 100vh;
+      height: 105vh;
       z-index: 15;
     }
 
@@ -479,13 +479,11 @@ span {
     .show-aside {
       right: 0vh;
       transition: 1s;
-      transition-timing-function: ease-in-out 1s;
     }
 
     .hide-aside {
       right: 100vh;
       transition: 1s;
-      transition-timing-function: ease-in-out 1s;
     }
 
     h1 {
