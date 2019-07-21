@@ -1,4 +1,5 @@
 var btnSave = document.querySelector('#btn-save');
+var formInputs = document.querySelector('.form-top');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
@@ -10,9 +11,8 @@ btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
-btnMenu.addEventListener('click', toggleMenu)
-inputBody.addEventListener('keyup', handleSaveBtn);
-inputTitle.addEventListener('keyup', handleSaveBtn);
+btnMenu.addEventListener('click', toggleMenu);
+formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
 
@@ -31,8 +31,13 @@ function handleCardButtons(e) {
   }
 }
 
+function handleFormInputs(e) {
+  if (e.target.id === 'input-title' || e.target.id === 'input-body') {
+    handleSaveBtn(e);
+  }
+}
+
 function addIdea(e) {
-  console.log('here!');
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
@@ -144,7 +149,6 @@ function toggleStar(e) {
 function handleTextEdit(e) {
   if (e.key === 'Enter') {
     e.target.blur();
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
     var idea = findIdea(e);
