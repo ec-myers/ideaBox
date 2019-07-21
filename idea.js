@@ -25,8 +25,8 @@ class Idea {
 		this.star = !this.star;
 	}
 
-	updateQuality() {
+	updateQuality(quality) {
+		this.quality = quality;
 
 	}
 }
-
