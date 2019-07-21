@@ -1,34 +1,18 @@
-// var btnGenius = document.querySelector('#btn-genius');
-// var btnPlausible = document.querySelector('#btn-plausible');
-// var btnQuality = document.querySelector('#btn-quality');
 var btnSave = document.querySelector('#btn-save');
-// var btnStar = document.querySelector('#btn-star');
-// var btnStarred = document.querySelector('#btn-starred');
-// var btnSwill = document.querySelector('#btn-swill');
+var formInputs = document.querySelector('.form-top');
 var inputBody = document.querySelector('#input-body');
-// var inputQuality = document.querySelector('#input-quality');
-// var inputSearch = document.querySelector('#input-search')
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
-var id = Date.now();
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('.icons-backdrop');
-// btnGenius.addEventListener('click', );
-// btnPlausible.addEventListener('click', );
-// btnQuality.addEventListener('click', toggleArrow);
-// btnSwill.addEventListener('click', );
+
 btnSave.addEventListener('click', addIdea);
-cardArea.addEventListener('click', handleCardButtons);
-cardArea.addEventListener('click', toggleStar);
-// btnSwill.addEventListener('click', );
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
-btnMenu.addEventListener('click', toggleMenu)
-// do we want to change these keyups to blur?
-inputBody.addEventListener('keyup', handleSaveBtn);
-inputTitle.addEventListener('keyup', handleSaveBtn);
+btnMenu.addEventListener('click', toggleMenu);
+formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
 
@@ -42,10 +26,18 @@ function handleCardButtons(e) {
   if (e.target.id === 'btn-delete') {
     deleteCard(e);
   }
+  if (e.target.id === 'btn-star') {
+    toggleStar(e);
+  }
+}
+
+function handleFormInputs(e) {
+  if (e.target.id === 'input-title' || e.target.id === 'input-body') {
+    handleSaveBtn(e);
+  }
 }
 
 function addIdea(e) {
-  console.log('here!');
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
@@ -76,7 +68,6 @@ function addCard(object) {
       </article>`);
 }
 
-
 function repopulateIdeasArray() {
   var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
     return new Idea(idea.id, idea.title, idea.body, idea.star, idea.quality);
@@ -91,82 +82,79 @@ function repopulateIdeasArray() {
 
 function upvoteQuality(e) {
   e.target.closest('.idea-card');
-  var index = findIdeaIndex(e);
-  if (ideasArray[index].quality < qualitiesArray.length - 1) {
-  var newQuality = ideasArray[index].quality + 1;
-  ideasArray[index].updateQuality(newQuality);
-  qualityDisplay(e);
-  ideasArray[index].saveToStorage(ideasArray);
+  var idea = findIdea(e);
+
+  if (idea.quality < qualitiesArray.length - 1) {
+    var newQuality = idea.quality + 1;
+    idea.updateQuality(newQuality);
+    qualityDisplay(e);
+    idea.saveToStorage(ideasArray);
   }
 }
 
 function downvoteQuality(e) {
   e.target.closest('.idea-card');
-  var index = findIdeaIndex(e);
-  if (ideasArray[index].quality > 0) {
-  var newQuality = ideasArray[index].quality - 1;
-  ideasArray[index].updateQuality(newQuality);
-  qualityDisplay(e)
-  ideasArray[index].saveToStorage(ideasArray);
+  var idea = findIdea(e);
+
+  if (idea.quality > 0) {
+    var newQuality = idea.quality - 1;
+    idea.updateQuality(newQuality);
+    qualityDisplay(e)
+    idea.saveToStorage(ideasArray);
   }
 }
 
 function qualityDisplay(e) {
   var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
-  var index = findIdeaIndex(e);
-  var ideaQuality = qualitiesArray[ideasArray[index].quality];
+  var idea = findIdea(e);
+  var ideaQuality = qualitiesArray[idea.quality];
+
   qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
 function deleteCard(e) {
-  if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove(); 
-    var index = findIdeaIndex(e);
-    ideasArray[index].deleteFromStorage(index, ideasArray);
-  }
+    var idea = findIdea(e);
+    idea.deleteFromStorage(ideasArray);
 }
 
-function findIdeaIndex(e) {
+function findIdea(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
-  var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  return identifier;
+  var idea = ideasArray.find(function(idea) {
+   return idea.id === parseInt(ideaId);
+  });
+  return idea;
 }
 
 function handleFocusOut(e) {
   if (e.target.className === 'card-title' || e.target.className === 'card-body') {
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
 }
 
 function toggleStar(e) {
-  if(e.target.classList.contains('img-star')) {
-    var getIdea = ideasArray[findIdeaIndex(e)];
-    getIdea.updateStar();
-    var changeStar = getIdea.star ? 'images/star-active.svg' : 'images/star.svg';
+    var idea = findIdea(e);
+    idea.updateStar();
+    var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
     e.target.setAttribute('src', changeStar);
 
-   var index = findIdeaIndex(e);
-
-    ideasArray[index].saveToStorage(ideasArray);
-
-  }
+    idea.saveToStorage(ideasArray);
 }
 
 function handleTextEdit(e) {
   if (e.key === 'Enter') {
     e.target.blur();
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
  } 
 

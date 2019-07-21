@@ -3,7 +3,7 @@ class Idea {
 		this.id = id;
 		this.title = title;
 		this.body = body;
-		this.star = star || false;
+		this.star = star;
 		this.quality = quality;
 	}
 
@@ -11,8 +11,13 @@ class Idea {
 		localStorage.setItem('ideasArray', JSON.stringify(array));
 	}
 
-	deleteFromStorage(index, array) {
+	deleteFromStorage(array) {
+		var ideaId = this.id;
+		var index = ideasArray.findIndex(function(idea) {
+			return parseInt(idea.id) === ideaId;
+		});
 		var newArray = array.splice(index, 1);
+
 		this.saveToStorage(ideasArray);
 	}
 
