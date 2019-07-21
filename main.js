@@ -94,29 +94,27 @@ function deleteCard(e) {
   console.log('inside delete');
   if (e.target.id === 'btn-delete'){
     e.target.closest('.idea-card').remove(); 
-    var index = findIdeaIndex(e);
-    ideasArray[index].deleteFromStorage(index, ideasArray);
+    var idea = findIdea(e);
+    idea.deleteFromStorage(ideasArray);
   }
 }
 
-function findIdeaIndex(e) {
+function findIdea(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
-  var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  return identifier;
+  var idea = ideasArray.find(function(idea) {
+   return parseInt(idea.id) === parseInt(ideaId);
+  });
+  return idea;
 }
 
 function handleFocusOut(e) {
   if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
-    console.log("index:", index);
-    // console.log(title.innerText);
-    // console.log(body.innerText);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
 }
 
@@ -133,10 +131,10 @@ function handleTextEdit(e) {
     console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
  } 
 
