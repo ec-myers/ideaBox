@@ -20,6 +20,7 @@ var ideasArray = []
 //   (ideaCard + i).addEventListener('blur', updateCard);
 // }
 var id = Date.now();
+var btnMenu = document.querySelector('.icons-backdrop');
 
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
@@ -27,12 +28,11 @@ var id = Date.now();
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('click', toggleStar);
 // btnSwill.addEventListener('click', );
-
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
 inputTitle.addEventListener('keyup', handleSaveBtn);
-
+btnMenu.addEventListener('click', toggleMenu)
 inputBody.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
@@ -150,4 +150,11 @@ function handleSaveBtn() {
   //update the array to include new changes
   //pass the array to local storage udpateIdea() to update data model
 
+function toggleMenu(e) {
+  var btnMenu = document.querySelector('.icons-backdrop');
+  var classes = ["show-aside", "hide-aside"]
+  for (var i = 0; i < classes.length; i++){
+    document.querySelector('aside').classList.toggle(classes[i])
+  }
+}
 
