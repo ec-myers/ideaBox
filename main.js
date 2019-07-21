@@ -15,7 +15,6 @@ var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
 // for (i = 0; i > ideasArray.length; i++) {
-
 //   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
 //   (ideaCard + i).addEventListener('blur', updateCard);
 // }
@@ -24,22 +23,16 @@ var id = Date.now();
 // btnGenius.addEventListener('click', );
 // btnPlausible.addEventListener('click', );
 // btnQuality.addEventListener('click', toggleArrow);
-btnSave.addEventListener('click', addIdea);
-cardArea.addEventListener('click', toggleStar);
 // btnSwill.addEventListener('click', );
-
+btnSave.addEventListener('click', addIdea);
+cardArea.addEventListener('click', handleCardButtons);
+cardArea.addEventListener('click', toggleStar);
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
-cardArea.addEventListener('click', handleCardButtons);
-inputTitle.addEventListener('keyup', handleSaveBtn);
-
 inputBody.addEventListener('keyup', handleSaveBtn);
+inputTitle.addEventListener('keyup', handleSaveBtn);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
 
-// handleBottom() {
-// 	if (e.)
-// 		make if functions to target every button/image
-// }
 function handleCardButtons(e) {
   if (e.target.id === 'btn-upvote') {
     upvoteQuality(e);
@@ -49,26 +42,6 @@ function handleCardButtons(e) {
   }
   if (e.target.id === 'btn-delete') {
     deleteCard(e);
-  }
-}
-
-function upvoteQuality(e) {
-  e.target.closest('.idea-card');
-  var index = findIdeaIndex(e);
-  if (ideasArray[index].quality < ideasArray[index].qualitiesArray.length - 1) {
-  var newQuality = ideasArray[index].quality + 1;
-  ideasArray[index].updateQuality(newQuality);
-  qualityDisplay(e);
-  }
-}
-
-function downvoteQuality(e) {
-  e.target.closest('.idea-card');
-  var index = findIdeaIndex(e);
-  if (ideasArray[index].quality > 0) {
-  var newQuality = ideasArray[index].quality - 1;
-  ideasArray[index].updateQuality(newQuality);
-  qualityDisplay(e)
   }
 }
 
@@ -90,8 +63,6 @@ function addIdea(e) {
 	inputBody.value = "";
 	handleSaveBtn();
 }
-
-handleSaveBtn();
 
 function addCard(object) {
   var numOfIdeas = ideasArray.length;
@@ -125,6 +96,28 @@ function repopulateIdeasArray() {
   }
 }
 
+function upvoteQuality(e) {
+  e.target.closest('.idea-card');
+  var index = findIdeaIndex(e);
+  if (ideasArray[index].quality < ideasArray[index].qualitiesArray.length - 1) {
+  var newQuality = ideasArray[index].quality + 1;
+  ideasArray[index].updateQuality(newQuality);
+  qualityDisplay(e);
+  ideasArray[index].saveToStorage(ideasArray);
+  }
+}
+
+function downvoteQuality(e) {
+  e.target.closest('.idea-card');
+  var index = findIdeaIndex(e);
+  if (ideasArray[index].quality > 0) {
+  var newQuality = ideasArray[index].quality - 1;
+  ideasArray[index].updateQuality(newQuality);
+  qualityDisplay(e)
+  ideasArray[index].saveToStorage(ideasArray);
+  }
+}
+
 function deleteCard(e) {
   console.log('inside delete');
   if (e.target.id === 'btn-delete'){
@@ -133,7 +126,6 @@ function deleteCard(e) {
     ideasArray[index].deleteFromStorage(index, ideasArray);
   }
 }
-
 
 function findIdeaIndex(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
@@ -151,8 +143,6 @@ function handleFocusOut(e) {
     ideasArray[index].updateIdea(newTitle, newBody);
     ideasArray[index].saveToStorage(ideasArray);
     console.log("index:", index);
-    // console.log(title.innerText);
-    // console.log(body.innerText);
   }
 }
 
@@ -177,15 +167,12 @@ function handleTextEdit(e) {
  } 
 
 function handleSaveBtn() {
-  // console.log("inputTitle", inputTitle.value);
-  // console.log("inputBody", inputBody.value);
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
+
   // console.log(title);
   //return enter key saves changes
   //assign the new fields to the property values on DOM
   //get the objects with the changes
   //update the array to include new changes
   //pass the array to local storage udpateIdea() to update data model
-
-
