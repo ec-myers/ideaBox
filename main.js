@@ -7,6 +7,7 @@ var ideasArray = []
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('.icons-backdrop');
 var searchInput = document.querySelector('#input-search');
+var ideaPrompt = document.querySelector('#idea-prompt');
 
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
@@ -15,6 +16,7 @@ cardArea.addEventListener('click', handleCardButtons);
 btnMenu.addEventListener('click', toggleMenu);
 formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
+window.addEventListener('DOMContentLoaded', displayIdeaMessage);
 
 
 function handleCardButtons(e) {
@@ -52,6 +54,7 @@ function addIdea(e) {
 	inputTitle.value = "";
 	inputBody.value = "";
 	handleSaveBtn();
+  displayIdeaMessage();
 }
 
 function addCard(object) {
@@ -122,6 +125,7 @@ function deleteCard(e) {
     e.target.closest('.idea-card').remove(); 
     var idea = findIdea(e);
     idea.deleteFromStorage(ideasArray);
+    displayIdeaMessage();
 }
 
 function findIdea(e) {
@@ -176,15 +180,14 @@ function returnSearchArray(array, searchTerms) {
   return searchResultsArray;
 }
 
-// function displaySearchResults() {
-//   if() {
-
-//   } 
-//   if (searchInput.value === '') {
-//     repopulateCards();
-//   }
-// }
-// returnSearchArray(ideasArray, searchInput)
+function displayIdeaMessage(){
+  if (ideasArray.length < 1) {
+    ideaPrompt.classList.remove('hidden');
+  } 
+  if (ideasArray.length > 0) {
+    ideaPrompt.classList.add('hidden');
+  }
+}
 
 function toggleMenu(e) {
   var btnMenu = document.querySelector('.icons-backdrop');
