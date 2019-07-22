@@ -122,16 +122,16 @@ function qualityDisplay(e) {
 }
 
 function deleteCard(e) {
-    e.target.closest('.idea-card').remove(); 
-    var idea = findIdea(e);
-    idea.deleteFromStorage(ideasArray);
-    displayIdeaMessage();
+  e.target.closest('.idea-card').remove(); 
+  var idea = findIdea(e);
+  idea.deleteFromStorage(ideasArray);
+  displayIdeaMessage();
 }
 
 function findIdea(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var idea = ideasArray.find(function(idea) {
-   return idea.id === parseInt(ideaId);
+    return idea.id === parseInt(ideaId);
   });
   return idea;
 }
@@ -148,12 +148,12 @@ function handleFocusOut(e) {
 }
 
 function toggleStar(e) {
-    var idea = findIdea(e);
-    idea.updateStar();
-    var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
-    e.target.setAttribute('src', changeStar);
+  var idea = findIdea(e);
+  idea.updateStar();
+  var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
+  e.target.setAttribute('src', changeStar);
 
-    idea.saveToStorage(ideasArray);
+  idea.saveToStorage(ideasArray);
 }
 
 function handleTextEdit(e) {
@@ -169,9 +169,8 @@ function handleTextEdit(e) {
  } 
 
 function handleSaveBtn() {
-	btnSave.disabled = !inputTitle.value || !inputBody.value;
+  btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
-
 
 function returnSearchArray(array, searchTerms) {
   var searchResultsArray = ideasArray.filter(function(idea) {
@@ -183,8 +182,7 @@ function returnSearchArray(array, searchTerms) {
 function displayIdeaMessage(){
   if (ideasArray.length === 0) {
     ideaPrompt.classList.remove('hidden');
-  } 
-  else {
+  } else {
     ideaPrompt.classList.add('hidden');
   }
 }
@@ -207,8 +205,3 @@ function toggleMenu(e) {
   animationLoop(iconTwo, '#burger-icon-2');
   animationLoop(iconThree, '#burger-icon-3');
   }
-
-//delete ALL cards (deleteCards function) and only show cards on the DOM that are in that new array (match)
-//if search bar is empty display ALL cards again repopulateCards
-
-
