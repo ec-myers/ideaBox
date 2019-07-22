@@ -180,6 +180,7 @@ main {
 
 /* Top Section */
 
+
 .section-top {
   background-color: #A9AAD2;
   display: flex;
@@ -316,6 +317,12 @@ textarea:focus {
   padding: 20px 60px;
 }
 
+#idea-prompt{
+  color: #D14119;
+  font-size: 17px;
+  font-weight: 700;
+}
+
 .idea-card {
   box-shadow: 0 0 10px #666666;
   width: 100%;
@@ -348,14 +355,9 @@ textarea:focus {
     transition: 0.2s;
 }
 
-/*.star-active {
-  position: absolute;
-  padding-left: 2px;
-}
-
 .hidden {
   visibility: hidden;
-}*/
+}
   
 .img-delete {
   margin-right: 5px;

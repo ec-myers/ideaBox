@@ -3,10 +3,11 @@ var formInputs = document.querySelector('.section-top');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
-var ideasArray = []
+var ideasArray = [];
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('#icons-background');
 var searchInput = document.querySelector('#input-search');
+var ideaPrompt = document.querySelector('#idea-prompt');
 
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
@@ -16,10 +17,10 @@ btnMenu.addEventListener('click', toggleMenu);
 formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', handlePageLoad);
 
-
 function handlePageLoad() {
   instantiateIdeas();
   populateCards(ideasArray);
+  displayIdeaMessage();
 }
 
 function handleCardButtons(e) {
@@ -55,6 +56,7 @@ function addIdea(e) {
 	inputTitle.value = "";
 	inputBody.value = "";
 	handleSaveBtn();
+  displayIdeaMessage();
 }
 
 function addCard(object) {
@@ -124,15 +126,16 @@ function qualityDisplay(e) {
 }
 
 function deleteCard(e) {
-    e.target.closest('.idea-card').remove(); 
-    var idea = findIdea(e);
-    idea.deleteFromStorage(ideasArray);
+  e.target.closest('.idea-card').remove(); 
+  var idea = findIdea(e);
+  idea.deleteFromStorage(ideasArray);
+  displayIdeaMessage();
 }
 
 function findIdea(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
   var idea = ideasArray.find(function(idea) {
-   return idea.id === parseInt(ideaId);
+    return idea.id === parseInt(ideaId);
   });
   return idea;
 }
@@ -149,12 +152,12 @@ function handleFocusOut(e) {
 }
 
 function toggleStar(e) {
-    var idea = findIdea(e);
-    idea.updateStar();
-    var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
-    e.target.setAttribute('src', changeStar);
+  var idea = findIdea(e);
+  idea.updateStar();
+  var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
+  e.target.setAttribute('src', changeStar);
 
-    idea.saveToStorage(ideasArray);
+  idea.saveToStorage(ideasArray);
 }
 
 function handleTextEdit(e) {
@@ -170,7 +173,7 @@ function handleTextEdit(e) {
  } 
 
 function handleSaveBtn() {
-	btnSave.disabled = !inputTitle.value || !inputBody.value;
+  btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
 function displaySearch(array) {
@@ -188,6 +191,14 @@ function returnSearchArray(array, searchTerms) {
     return idea.title.toLowerCase().includes(searchTerms.toLowerCase()) || idea.body.toLowerCase().includes(searchTerms.toLowerCase());
   });
   return searchResultsArray;
+}
+
+function displayIdeaMessage(){
+  if (ideasArray.length === 0) {
+    ideaPrompt.classList.remove('hidden');
+  } else {
+    ideaPrompt.classList.add('hidden');
+  }
 }
 
 function toggleMenu(e) {
@@ -210,8 +221,3 @@ function toggleMenu(e) {
   animationLoop(iconTwo, '#burger-icon-2');
   animationLoop(iconThree, '#burger-icon-3');
   }
-
-//delete ALL cards (deleteCards function) and only show cards on the DOM that are in that new array (match)
-//if search bar is empty display ALL cards again repopulateCards
-
-
