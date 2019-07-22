@@ -28,7 +28,7 @@ function handlePageLoad() {
 function handleAsideButtons(e) {
   event.preventDefault(e);
   if (event.target.id === 'btn-starred') {
-    console.log(e); // console.logs are just for test and show
+    displayStarred(ideasArray); 
   }
   if (event.target.id === 'btn-swill') {
     displayQuality(ideasArray, 0);
@@ -38,9 +38,6 @@ function handleAsideButtons(e) {
   }
   if (event.target.id === 'btn-genius') {
     displayQuality(ideasArray, 2);
-  }
-  if (event.target.id === 'btn-quality') {
-    console.log(e);
   }
 }
 
@@ -216,7 +213,7 @@ function returnSearchArray(array, searchTerms) {
 
 function displayQuality(array, qualityNum) {
   cardArea.innerHTML = '';
-  var qualitiesArray = returnQualitiesArray(array, qualityNum)
+  var qualitiesArray = returnQualitiesArray(array, qualityNum);
   populateCards(qualitiesArray);
 }
 
@@ -225,6 +222,19 @@ function returnQualitiesArray(array, qualityNum) {
     return idea.quality === qualityNum;
   });
   return qualitiesArray;
+}
+
+function displayStarred(array) {
+  cardArea.innerHTML = '';
+  var starredArray = returnStarredArray(array);
+  populateCards(starredArray);
+}
+
+function returnStarredArray(array) {
+  var starredArray = array.filter(function(idea) {
+    return idea.star === true;
+  });
+  return starredArray;
 }
 
 function displayIdeaMessage(){
