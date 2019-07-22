@@ -180,6 +180,7 @@ main {
 
 /* Top Section */
 
+
 .section-top {
   background-color: #A9AAD2;
   display: flex;
@@ -314,6 +315,12 @@ textarea:focus {
   height: 100%;
   justify-items: center;
   padding: 20px 60px;
+}
+
+#idea-prompt{
+  color: #D14119;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .idea-card {
