@@ -1,12 +1,12 @@
 var btnSave = document.querySelector('#btn-save');
-var formInputs = document.querySelector('.form-top');
+var formInputs = document.querySelector('.section-top');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
 var ideasArray = []
 var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('#icons-background');
-
+var searchInput = document.querySelector('#input-search');
 
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
@@ -35,6 +35,11 @@ function handleCardButtons(e) {
 function handleFormInputs(e) {
   if (e.target.id === 'input-title' || e.target.id === 'input-body') {
     handleSaveBtn(e);
+  }
+  if (e.target.id === 'input-search') {
+    console.log(e);
+    var newArray = returnSearchArray(ideasArray, searchInput.value);
+    console.log(newArray);
   }
 }
 
@@ -163,6 +168,24 @@ function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
+
+function returnSearchArray(array, searchTerms) {
+  var searchResultsArray = ideasArray.filter(function(idea) {
+    return idea.title.includes(searchTerms) || idea.body.includes(searchTerms);
+  });
+  return searchResultsArray;
+}
+
+// function displaySearchResults() {
+//   if() {
+
+//   } 
+//   if (searchInput.value === '') {
+//     repopulateCards();
+//   }
+// }
+// returnSearchArray(ideasArray, searchInput)
+
 function toggleMenu(e) {
   var btnMenu = document.querySelector('#icons-background');
   var iconBackground = ["icons-backdrop-show", "icons-backdrop-hide"]
@@ -183,3 +206,8 @@ function toggleMenu(e) {
   animationLoop(iconTwo, '#burger-icon-2');
   animationLoop(iconThree, '#burger-icon-3');
   }
+
+//delete ALL cards (deleteCards function) and only show cards on the DOM that are in that new array (match)
+//if search bar is empty display ALL cards again repopulateCards
+
+
