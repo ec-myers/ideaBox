@@ -1,10 +1,10 @@
+var ideasArray = []
+var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnSave = document.querySelector('#btn-save');
 var formInputs = document.querySelector('.section-top');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
-var ideasArray = []
-var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('.icons-backdrop');
 var searchInput = document.querySelector('#input-search');
 
@@ -15,7 +15,6 @@ cardArea.addEventListener('click', handleCardButtons);
 btnMenu.addEventListener('click', toggleMenu);
 formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
-
 
 function handleCardButtons(e) {
   if (e.target.id === 'btn-upvote') {
@@ -37,9 +36,7 @@ function handleFormInputs(e) {
     handleSaveBtn(e);
   }
   if (e.target.id === 'input-search') {
-    console.log(e);
-    var newArray = returnSearchArray(ideasArray, searchInput.value);
-    console.log(newArray);
+    displaySearch();
   }
 }
 
@@ -168,23 +165,28 @@ function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
 
-
-function returnSearchArray(array, searchTerms) {
-  var searchResultsArray = ideasArray.filter(function(idea) {
-    return idea.title.includes(searchTerms) || idea.body.includes(searchTerms);
-  });
-  return searchResultsArray;
+function returnSearchArray() {
+  var searchTerms = document.querySelector("#input-search").value;
+  return ideasArray.filter(function(ideaObject) {
+    return ideaObject.title.toLowerCase().includes(searchTerms.toLowerCase()) || 
+    ideaObject.body.toLowerCase().includes(searchTerms.toLowerCase());
+  })
 }
 
-// function displaySearchResults() {
-//   if() {
+function emptyCardArea() {
+  document.querySelector(".section-bottom").innerHTML = '';
+}
 
-//   } 
-//   if (searchInput.value === '') {
-//     repopulateCards();
-//   }
-// }
-// returnSearchArray(ideasArray, searchInput)
+function displaySearch() {
+  emptyCardArea();
+  returnSearchArray().forEach(function(ideaObject){
+    addCard(ideaObject);
+  })
+  if (document.querySelector("#input-search").value === '') {
+    emptyCardArea();
+    repopulateIdeasArray()
+  }
+}
 
 function toggleMenu(e) {
   var btnMenu = document.querySelector('.icons-backdrop');
@@ -204,8 +206,3 @@ function toggleMenu(e) {
   animationLoop(iconTwo, '#burger-icon-2');
   animationLoop(iconThree, '#burger-icon-3');
   }
-
-//delete ALL cards (deleteCards function) and only show cards on the DOM that are in that new array (match)
-//if search bar is empty display ALL cards again repopulateCards
-
-
