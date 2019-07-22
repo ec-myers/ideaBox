@@ -44,14 +44,11 @@ function handleAsideButtons(e) {
 function handleCardButtons(e) {
   if (e.target.id === 'btn-upvote') {
     upvoteQuality(e);
-  }
-  if (e.target.id === 'btn-downvote') {
+  } else if (e.target.id === 'btn-downvote') {
     downvoteQuality(e);
-  }
-  if (e.target.id === 'btn-delete') {
+  } else if (e.target.id === 'btn-delete') {
     deleteCard(e);
-  }
-  if (e.target.id === 'btn-star') {
+  } else if (e.target.id === 'btn-star') {
     toggleStar(e);
   }
 }
@@ -59,8 +56,7 @@ function handleCardButtons(e) {
 function handleFormInputs(e) {
   if (e.target.id === 'input-title' || e.target.id === 'input-body') {
     handleSaveBtn(e);
-  }
-  if (e.target.id === 'input-search') {
+  } else if (e.target.id === 'input-search') {
     displaySearch(ideasArray);
   }
 }
