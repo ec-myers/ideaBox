@@ -42,7 +42,7 @@ function handleFormInputs(e) {
     handleSaveBtn(e);
   }
   if (e.target.id === 'input-search') {
- 
+    displaySearch(ideasArray);
   }
 }
 
@@ -171,6 +171,16 @@ function handleTextEdit(e) {
 
 function handleSaveBtn() {
 	btnSave.disabled = !inputTitle.value || !inputBody.value;
+}
+
+function displaySearch(array) {
+  cardArea.innerHTML = '';
+  if (searchInput.value === '') {
+    populateCards(array);
+  } else {
+    var searchArray = returnSearchArray(array, searchInput.value);
+    populateCards(searchArray);
+  }
 }
 
 function returnSearchArray(array, searchTerms) {
