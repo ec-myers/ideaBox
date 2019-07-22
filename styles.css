@@ -568,30 +568,35 @@ span {
       transition: 0.25s;
     }
 
-    .icons-backdrop {
+    .icons-backdrop-show {
       background-color: #1F1F3D;
       align-items: center;
       border-radius: 20%;
       top: 15px;
       display: flex;
       flex-direction: column;
-      height: 40px;
+      height: 45px;
       justify-content: center;
       position: fixed;
       left: 10px;
       width: 55px;
       z-index: 40;
-      box-shadow: 0 0 5px black
+      transition: 0.3s ease-in-out .45s;
     }
 
-    .icons-backdrop:hover {
-      background-color: #A9AAD2;
-      transition: 0.25s;
-    }
-
-    .icons-backdrop:active {
-      background-color: #ff5e7e;
-      transition: 0.25s;
+    .icons-backdrop-hide {
+      align-items: center;
+      border-radius: 20%;
+      top: 15px;
+      display: flex;
+      flex-direction: column;
+      height: 45px;
+      justify-content: center;
+      position: fixed;
+      left: 10px;
+      width: 55px;
+      z-index: 40;
+      transition: 0.45s;
     }
 
     .section-top {
