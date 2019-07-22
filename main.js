@@ -181,10 +181,10 @@ function returnSearchArray(array, searchTerms) {
 }
 
 function displayIdeaMessage(){
-  if (ideasArray.length < 1) {
+  if (ideasArray.length === 0) {
     ideaPrompt.classList.remove('hidden');
   } 
-  if (ideasArray.length > 0) {
+  else {
     ideaPrompt.classList.add('hidden');
   }
 }
