@@ -8,7 +8,9 @@ var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('#icons-background');
 var searchInput = document.querySelector('#input-search');
 var ideaPrompt = document.querySelector('#idea-prompt');
+var asideArea = document.querySelector("aside");
 
+asideArea.addEventListener('click', handleAsideButtons);
 btnSave.addEventListener('click', addIdea);
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
@@ -21,6 +23,22 @@ function handlePageLoad() {
   instantiateIdeas();
   populateCards(ideasArray);
   displayIdeaMessage();
+}
+
+function handleAsideButtons(e) {
+  event.preventDefault(e);
+  if (event.target.id === 'btn-starred') {
+    displayStarred(ideasArray); 
+  }
+  if (event.target.id === 'btn-swill') {
+    displayQuality(ideasArray, 0);
+  } 
+  if (event.target.id === 'btn-plausible') {
+    displayQuality(ideasArray, 1);
+  }
+  if (event.target.id === 'btn-genius') {
+    displayQuality(ideasArray, 2);
+  }
 }
 
 function handleCardButtons(e) {
@@ -191,6 +209,32 @@ function returnSearchArray(array, searchTerms) {
     return idea.title.toLowerCase().includes(searchTerms.toLowerCase()) || idea.body.toLowerCase().includes(searchTerms.toLowerCase());
   });
   return searchResultsArray;
+}
+
+function displayQuality(array, qualityNum) {
+  cardArea.innerHTML = '';
+  var qualitiesArray = returnQualitiesArray(array, qualityNum);
+  populateCards(qualitiesArray);
+}
+
+function returnQualitiesArray(array, qualityNum) {
+  var qualitiesArray = array.filter(function(idea) {
+    return idea.quality === qualityNum;
+  });
+  return qualitiesArray;
+}
+
+function displayStarred(array) {
+  cardArea.innerHTML = '';
+  var starredArray = returnStarredArray(array);
+  populateCards(starredArray);
+}
+
+function returnStarredArray(array) {
+  var starredArray = array.filter(function(idea) {
+    return idea.star === true;
+  });
+  return starredArray;
 }
 
 function displayIdeaMessage(){
