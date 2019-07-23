@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #1F1F3D;
+  background-color: #EAEAF4;
   display: flex;
   flex-direction: row;
 }
@@ -24,7 +24,7 @@ aside {
   background-color: #1F1F3D;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 125vh;
   width: 35%;
 }
 
@@ -175,7 +175,7 @@ main {
   background-color: #1F1F3D;
   height: 100%;
   width: 100%;
-  box-shadow: -5px 0px 15px black
+  /*box-shadow: -5px 0px 15px black*/
 }
 
 /* Top Section */
