@@ -373,8 +373,7 @@ textarea:focus {
 }
 
 .img-downvote:hover {
-  transform: translate(0px, 2px);
-  transition: 0.2s;
+  content:url("images/downvote-active.svg");
 }
 
 .img-upvote {
@@ -382,8 +381,7 @@ textarea:focus {
 }
 
 .img-upvote:hover {
-  transform: translate(0px, -2px);
-  transition: 0.2s;
+  content:url("images/upvote-active.svg");
 }
 
 .card-content {
