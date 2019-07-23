@@ -366,6 +366,7 @@ textarea:focus {
 .img-delete:hover {
   transform: rotate(-20deg);
   transition: 0.2s;
+  content:url("images/delete-active.svg");
 }
 
 .img-downvote {
