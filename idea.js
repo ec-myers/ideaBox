@@ -11,11 +11,13 @@ class Idea {
 		localStorage.setItem('ideasArray', JSON.stringify(array));
 	}
 
-	deleteFromStorage(index, array) {
+	deleteFromStorage(array) {
+		var ideaId = this.id;
+		var index = ideasArray.findIndex(function(idea) {
+			return parseInt(idea.id) === ideaId;
+		});
 		var newArray = array.splice(index, 1);
-		
-		console.log(newArray);
-		console.log(id)
+
 		this.saveToStorage(ideasArray);
 	}
 
@@ -28,8 +30,8 @@ class Idea {
 		this.star = !this.star;
 	}
 
-	updateQuality() {
+	updateQuality(quality) {
+		this.quality = quality;
 
 	}
 }
-

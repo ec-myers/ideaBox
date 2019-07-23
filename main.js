@@ -1,52 +1,67 @@
-// var btnDelete = document.querySelector('#btn-delete');
-// var btnDownvote = document.querySelector('#btn-downvote');
-// var btnGenius = document.querySelector('#btn-genius');
-// var btnPlausible = document.querySelector('#btn-plausible');
-// var btnQuality = document.querySelector('#btn-quality');
 var btnSave = document.querySelector('#btn-save');
-// var btnStar = document.querySelector('#btn-star');
-// var btnStarred = document.querySelector('#btn-star');
-// var btnSwill = document.querySelector('#btn-swill');
-// var btnUpvote = document.querySelector('#btn-upvote');
+var formInputs = document.querySelector('.section-top');
 var inputBody = document.querySelector('#input-body');
-// var inputQuality = document.querySelector('#input-quality');
-// var inputSearch = document.querySelector('#input-search')
 var inputTitle = document.querySelector('#input-title');
 var cardArea = document.querySelector('.section-bottom');
-var ideasArray = []
-// for (i = 0; i > ideasArray.length; i++) {
+var ideasArray = [];
+var qualitiesArray = ["Swill", "Plausible", "Genius"];
+var btnMenu = document.querySelector('#icons-background');
+var searchInput = document.querySelector('#input-search');
+var ideaPrompt = document.querySelector('#idea-prompt');
+var asideArea = document.querySelector("aside");
 
-//   (ideaCard + i) = document.querySelector(`idea-card-${i}`);
-//   (ideaCard + i).addEventListener('blur', updateCard);
-// }
-var id = Date.now();
-
-// btnGenius.addEventListener('click', );
-// btnPlausible.addEventListener('click', );
-// btnQuality.addEventListener('click', toggleArrow);
+asideArea.addEventListener('click', handleAsideButtons);
 btnSave.addEventListener('click', addIdea);
-// cardArea.addEventListener('click', toggleStar);
-// btnSwill.addEventListener('click', );
-
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
 cardArea.addEventListener('click', handleCardButtons);
-inputTitle.addEventListener('keyup', handleSaveBtn);
+btnMenu.addEventListener('click', toggleMenu);
+formInputs.addEventListener('keyup', handleFormInputs);
+window.addEventListener('DOMContentLoaded', handlePageLoad);
 
-inputBody.addEventListener('keyup', handleSaveBtn);
-window.addEventListener('DOMContentLoaded', repopulateIdeasArray);
+function handlePageLoad() {
+  instantiateIdeas();
+  populateCards(ideasArray);
+  displayIdeaMessage();
+}
 
-// handleBottom() {
-// 	if (e.)
-// 		make if functions to target every button/image
-// }
+function handleAsideButtons(e) {
+  event.preventDefault(e);
+  if (event.target.id === 'btn-starred') {
+    displayStarred(ideasArray); 
+  }
+  if (event.target.id === 'btn-swill') {
+    displayQuality(ideasArray, 0);
+  } 
+  if (event.target.id === 'btn-plausible') {
+    displayQuality(ideasArray, 1);
+  }
+  if (event.target.id === 'btn-genius') {
+    displayQuality(ideasArray, 2);
+  }
+}
+
 function handleCardButtons(e) {
-  deleteCard(e);
-  toggleStar(e);
+  if (e.target.id === 'btn-upvote') {
+    upvoteQuality(e);
+  } else if (e.target.id === 'btn-downvote') {
+    downvoteQuality(e);
+  } else if (e.target.id === 'btn-delete') {
+    deleteCard(e);
+  } else if (e.target.id === 'btn-star') {
+    toggleStar(e);
+  }
+}
+
+function handleFormInputs(e) {
+  if (e.target.id === 'input-title' || e.target.id === 'input-body') {
+    handleSaveBtn(e);
+  } else if (e.target.id === 'input-search') {
+    displaySearch(ideasArray);
+  }
 }
 
 function addIdea(e) {
-  console.log('here!');
 	e.preventDefault();
 	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value);
 	ideasArray.push(idea);
@@ -55,15 +70,16 @@ function addIdea(e) {
 	inputTitle.value = "";
 	inputBody.value = "";
 	handleSaveBtn();
+  displayIdeaMessage();
 }
 
-
 function addCard(object) {
+  var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
   var numOfIdeas = ideasArray.length;
   var starImage = object.star ? "images/star-active.svg" : "images/star.svg";
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
-          <img class="img-star star" src=${starImage} alt="star" id="btn-star">
+          <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
           <img class="img-delete" src="images/delete.svg" alt="delete" id="btn-delete">
         </header>
         <div class="card-content">
@@ -72,51 +88,81 @@ function addCard(object) {
         </div>
         <footer>
           <img class="img-upvote" src="images/upvote.svg" alt="upvote" id="btn-upvote">
-          <p class="quality-text">Quality: ${object.quality}</p>
+          <p class="quality-text">Quality: ${qualitiesArray[object.quality]}</p>
           <img class="img-downvote" src="images/downvote.svg" alt="downvote" id="btn-downvote">    
         </footer>
       </article>`);
 }
 
-function repopulateIdeasArray() {
-  var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
+function populateCards(array) {
+  for (i = 0; i < array.length; i++) {
+    addCard(array[i]);
+  }
+}
+
+function instantiateIdeas() {
+    var newArray = JSON.parse(localStorage.getItem('ideasArray')).map(function(idea) {
     return new Idea(idea.id, idea.title, idea.body, idea.star, idea.quality);
   });
 
   ideasArray = newArray;
+}
 
-  for (i = 0; i < ideasArray.length; i++) {
-    addCard(ideasArray[i]);
+function upvoteQuality(e) {
+  e.target.closest('.idea-card');
+  var idea = findIdea(e);
+
+  if (idea.quality < qualitiesArray.length - 1) {
+    var newQuality = idea.quality + 1;
+    idea.updateQuality(newQuality);
+    qualityDisplay(e);
+    idea.saveToStorage(ideasArray);
   }
+}
+
+function downvoteQuality(e) {
+  e.target.closest('.idea-card');
+  var idea = findIdea(e);
+
+  if (idea.quality > 0) {
+    var newQuality = idea.quality - 1;
+    idea.updateQuality(newQuality);
+    qualityDisplay(e)
+    idea.saveToStorage(ideasArray);
+  }
+}
+
+function qualityDisplay(e) {
+  var qualityDisplay = e.target.closest('.idea-card').querySelector('.quality-text');
+  var idea = findIdea(e);
+  var ideaQuality = qualitiesArray[idea.quality];
+
+  qualityDisplay.innerText = `Quality: ${ideaQuality}`
 }
 
 function deleteCard(e) {
-  console.log('inside delete');
-  if (e.target.id === 'btn-delete'){
-    e.target.closest('.idea-card').remove(); 
-    var index = findIdeaIndex(e);
-    ideasArray[index].deleteFromStorage(index, ideasArray);
-  }
+  e.target.closest('.idea-card').remove(); 
+  var idea = findIdea(e);
+  idea.deleteFromStorage(ideasArray);
+  displayIdeaMessage();
 }
 
-function findIdeaIndex(e) {
+function findIdea(e) {
   var ideaId = e.target.closest('.idea-card').getAttribute('data-id');
-  var identifier = ideasArray.findIndex(idea => parseInt(idea.id) == ideaId);
-  return identifier;
+  var idea = ideasArray.find(function(idea) {
+    return idea.id === parseInt(ideaId);
+  });
+  return idea;
 }
 
 function handleFocusOut(e) {
   if (e.target.className === 'card-title' || e.target.className === 'card-body') {
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
-    console.log("index:", index);
-    // console.log(title.innerText);
-    // console.log(body.innerText);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
 }
 
@@ -132,38 +178,98 @@ function changeStarColor(e, idea){
     // var off = document.querySelector('.star').classList.add('hidden');
 
 function toggleStar(e) {
-  if (e.target.id === 'btn-star') {
-    var index = findIdeaIndex(e);
+  var idea = findIdea(e);
+  idea.updateStar();
+  var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
+  e.target.setAttribute('src', changeStar);
 
-    ideasArray[index].updateStar();
-    ideasArray[index].saveToStorage(ideasArray);
-    changeStarColor(e, ideasArray[index]);
-  }
+  idea.saveToStorage(ideasArray);
 }
 
 function handleTextEdit(e) {
   if (e.key === 'Enter') {
     e.target.blur();
-    console.log("event:", event);
     var newTitle = e.target.closest('.card-content').querySelector('.card-title').innerText;
     var newBody = e.target.closest('.card-content').querySelector('.card-body').innerText;
-    var index = findIdeaIndex(e);
+    var idea = findIdea(e);
 
-    ideasArray[index].updateIdea(newTitle, newBody);
-    ideasArray[index].saveToStorage(ideasArray);
+    idea.updateIdea(newTitle, newBody);
+    idea.saveToStorage(ideasArray);
   }
  } 
 
 function handleSaveBtn() {
-  console.log("inputTitle", inputTitle.value);
-  console.log("inputBody", inputBody.value);
-	btnSave.disabled = !inputTitle.value || !inputBody.value;
+  btnSave.disabled = !inputTitle.value || !inputBody.value;
 }
-  // console.log(title);
-  //return enter key saves changes
-  //assign the new fields to the property values on DOM
-  //get the objects with the changes
-  //update the array to include new changes
-  //pass the array to local storage udpateIdea() to update data model
 
+function displaySearch(array) {
+  cardArea.innerHTML = '';
+  if (searchInput.value === '') {
+    populateCards(array);
+  } else {
+    var searchArray = returnSearchArray(array, searchInput.value);
+    populateCards(searchArray);
+  }
+}
 
+function returnSearchArray(array, searchTerms) {
+  var searchResultsArray = array.filter(function(idea) {
+    return idea.title.toLowerCase().includes(searchTerms.toLowerCase()) || idea.body.toLowerCase().includes(searchTerms.toLowerCase());
+  });
+  return searchResultsArray;
+}
+
+function displayQuality(array, qualityNum) {
+  cardArea.innerHTML = '';
+  var qualitiesArray = returnQualitiesArray(array, qualityNum);
+  populateCards(qualitiesArray);
+}
+
+function returnQualitiesArray(array, qualityNum) {
+  var qualitiesArray = array.filter(function(idea) {
+    return idea.quality === qualityNum;
+  });
+  return qualitiesArray;
+}
+
+function displayStarred(array) {
+  cardArea.innerHTML = '';
+  var starredArray = returnStarredArray(array);
+  populateCards(starredArray);
+}
+
+function returnStarredArray(array) {
+  var starredArray = array.filter(function(idea) {
+    return idea.star === true;
+  });
+  return starredArray;
+}
+
+function displayIdeaMessage(){
+  if (ideasArray.length === 0) {
+    ideaPrompt.classList.remove('hidden');
+  } else {
+    ideaPrompt.classList.add('hidden');
+  }
+}
+
+function toggleMenu(e) {
+  var btnMenu = document.querySelector('#icons-background');
+  var iconBackground = ["icons-backdrop-show", "icons-backdrop-hide"]
+  var classes = ["show-aside", "hide-aside"]
+  var iconOne = ["burger-icon-1", "x-icon-1"]
+  var iconTwo = ["burger-icon-1", "x-icon-2"]
+  var iconThree = ["burger-icon-1", "x-icon-3"]
+
+  function animationLoop(classChange, element) {
+    for (var i = 0; i < classChange.length; i++){
+    document.querySelector(element).classList.toggle(classChange[i])
+    }
+  }
+
+  animationLoop(iconBackground, '#icons-background')
+  animationLoop(classes, 'aside');
+  animationLoop(iconOne, '#burger-icon-1');
+  animationLoop(iconTwo, '#burger-icon-2');
+  animationLoop(iconThree, '#burger-icon-3');
+  }
