@@ -76,7 +76,7 @@ function addIdea(e) {
 
 function addCard(object) {
   var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
-  var numOfIdeas = ideasArray.length;
+  // var numOfIdeas = ideasArray.length;
   var starImage = object.star ? "images/star-active.svg" : "images/star.svg";
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
@@ -266,7 +266,7 @@ function displayStarMessage(array) {
   var starredArray = returnStarredArray(array);
 
   if (starredArray.length === 0) {
-    cardArea.insertAdjacentHTML('afterbegin', `<p id="star-prompt">💡 Star some ideas!💡</p>`);
+    cardArea.insertAdjacentHTML('afterbegin', `<p id="star-prompt">💡Star some ideas!</p>`);
   }
 }
 

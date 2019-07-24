@@ -316,11 +316,6 @@ textarea:focus {
   padding: 20px 60px;
 }
 
-#idea-prompt{
-  color: #D14119;
-  font-size: 17px;
-  font-weight: 700;
-}
 
 .idea-card {
   box-shadow: 0 0 10px #666666;
@@ -358,11 +353,19 @@ textarea:focus {
 .hidden {
   visibility: hidden;
 }
+
+#idea-prompt{
+  color: #D14119;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 50px;
+}
   
 #star-prompt{
   color: #D14119;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
+  padding-top: 50px;
 }
 
 .img-delete {
