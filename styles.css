@@ -6,6 +6,7 @@
 }
 
 body {
+  background-color: #1F1F3D;
   display: flex;
   flex-direction: row;
 }
