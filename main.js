@@ -1,23 +1,23 @@
+var ideasArray = [];
+var qualitiesArray = ['Swill', 'Plausible', 'Genius'];
+var asideArea = document.querySelector('aside');
+var btnMenu = document.querySelector('#icons-background');
 var btnSave = document.querySelector('#btn-save');
 var btnStarred = document.querySelector('#btn-starred');
+var cardArea = document.querySelector('.section-bottom');
 var formInputs = document.querySelector('.section-top');
+var ideaPrompt = document.querySelector('#idea-prompt');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
-var cardArea = document.querySelector('.section-bottom');
-var ideasArray = [];
-var qualitiesArray = ["Swill", "Plausible", "Genius"];
-var btnMenu = document.querySelector('#icons-background');
 var searchInput = document.querySelector('#input-search');
-var ideaPrompt = document.querySelector('#idea-prompt');
 var starPrompt = document.querySelector('#star-prompt');
-var asideArea = document.querySelector("aside");
 
 asideArea.addEventListener('click', handleAsideButtons);
+btnMenu.addEventListener('click', toggleMenu);
 btnSave.addEventListener('click', addIdea);
+cardArea.addEventListener('click', handleCardButtons);
 cardArea.addEventListener('focusout', handleFocusOut);
 cardArea.addEventListener('keydown', handleTextEdit);
-cardArea.addEventListener('click', handleCardButtons);
-btnMenu.addEventListener('click', toggleMenu);
 formInputs.addEventListener('keyup', handleFormInputs);
 window.addEventListener('DOMContentLoaded', handlePageLoad);
 
@@ -28,15 +28,14 @@ function handlePageLoad() {
 }
 
 function handleAsideButtons(e) {
-  event.preventDefault(e);
-  if (event.target.id === 'btn-starred') {
+  e.preventDefault(e);
+  if (e.target.id === 'btn-starred') {
     displayStarred(ideasArray); 
-    // displayStarMessage(ideasArray);
-  } else if (event.target.id === 'btn-swill') {
+  } else if (e.target.id === 'btn-swill') {
     displayQuality(ideasArray, 0);
-  } else if (event.target.id === 'btn-plausible') {
+  } else if (e.target.id === 'btn-plausible') {
     displayQuality(ideasArray, 1);
-  } else if (event.target.id === 'btn-genius') {
+  } else if (e.target.id === 'btn-genius') {
     displayQuality(ideasArray, 2);
   }
 }
@@ -64,20 +63,20 @@ function handleFormInputs(e) {
 
 function addIdea(e) {
 	e.preventDefault();
-	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value);
+	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
+
 	ideasArray.push(idea);
 	idea.saveToStorage(ideasArray);
 	addCard(idea);
-	inputTitle.value = "";
-	inputBody.value = "";
+	inputTitle.value = '';
+	inputBody.value = '';
 	handleSaveBtn();
   displayIdeaMessage();
 }
 
 function addCard(object) {
   var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
-  // var numOfIdeas = ideasArray.length;
-  var starImage = object.star ? "images/star-active.svg" : "images/star.svg";
+
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
@@ -138,12 +137,13 @@ function qualityDisplay(e) {
   var idea = findIdea(e);
   var ideaQuality = qualitiesArray[idea.quality];
 
-  qualityDisplay.innerText = `Quality: ${ideaQuality}`
+  qualityDisplay.innerText = `Quality: ${ideaQuality}`;
 }
 
 function deleteCard(e) {
   e.target.closest('.idea-card').remove(); 
   var idea = findIdea(e);
+
   idea.deleteFromStorage(ideasArray);
   displayIdeaMessage();
 }
@@ -153,6 +153,7 @@ function findIdea(e) {
   var idea = ideasArray.find(function(idea) {
     return idea.id === parseInt(ideaId);
   });
+
   return idea;
 }
 
@@ -167,20 +168,12 @@ function handleFocusOut(e) {
   }
 }
 
-function changeStarColor(e, idea){
-    if (idea.star === true) {
-      e.target.closest('.idea-card').querySelector('.img-star').src='images/star-active.svg';
-    } else {
-      e.target.closest('.idea-card').querySelector('.img-star').src='images/star.svg';
-    }
-}
-
 function toggleStar(e) {
   var idea = findIdea(e);
   idea.updateStar();
   var changeStar = idea.star ? 'images/star-active.svg' : 'images/star.svg';
-  e.target.setAttribute('src', changeStar);
 
+  e.target.setAttribute('src', changeStar);
   idea.saveToStorage(ideasArray);
 }
 
@@ -206,6 +199,7 @@ function displaySearch(array) {
     populateCards(array);
   } else {
     var searchArray = returnSearchArray(array, searchInput.value);
+
     populateCards(searchArray);
   }
 }
@@ -214,12 +208,14 @@ function returnSearchArray(array, searchTerms) {
   var searchResultsArray = array.filter(function(idea) {
     return idea.title.toLowerCase().includes(searchTerms.toLowerCase()) || idea.body.toLowerCase().includes(searchTerms.toLowerCase());
   });
+
   return searchResultsArray;
 }
 
 function displayQuality(array, qualityNum) {
   cardArea.innerHTML = '';
   var qualitiesArray = returnQualitiesArray(array, qualityNum);
+
   populateCards(qualitiesArray);
 }
 
@@ -227,6 +223,7 @@ function returnQualitiesArray(array, qualityNum) {
   var qualitiesArray = array.filter(function(idea) {
     return idea.quality === qualityNum;
   });
+
   return qualitiesArray;
 }
 
@@ -251,6 +248,7 @@ function returnStarredArray(array) {
   var starredArray = array.filter(function(idea) {
     return idea.star === true;
   });
+  
   return starredArray;
 }
 
@@ -284,11 +282,11 @@ function displayIdeaMessage(){
 
 function toggleMenu(e) {
   var btnMenu = document.querySelector('#icons-background');
-  var iconBackground = ["icons-backdrop-show", "icons-backdrop-hide"]
-  var classes = ["show-aside", "hide-aside"]
-  var iconOne = ["burger-icon-1", "x-icon-1"]
-  var iconTwo = ["burger-icon-1", "x-icon-2"]
-  var iconThree = ["burger-icon-1", "x-icon-3"]
+  var iconBackground = ['icons-backdrop-show', 'icons-backdrop-hide']
+  var classes = ['show-aside', 'hide-aside']
+  var iconOne = ['burger-icon-1', 'x-icon-1']
+  var iconTwo = ['burger-icon-1', 'x-icon-2']
+  var iconThree = ['burger-icon-1', 'x-icon-3']
 
   function animationLoop(classChange, element) {
     for (var i = 0; i < classChange.length; i++){
