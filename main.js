@@ -64,7 +64,7 @@ function handleFormInputs(e) {
 
 function addIdea(e) {
 	e.preventDefault();
-	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value);
+	var idea = new Idea(Date.now(), inputTitle.value, inputBody.value, false, 0);
 	ideasArray.push(idea);
 	idea.saveToStorage(ideasArray);
 	addCard(idea);
@@ -77,7 +77,7 @@ function addIdea(e) {
 function addCard(object) {
   var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
   var numOfIdeas = ideasArray.length;
-  var starImage = object.star ? "images/star-active.svg" : "images/star.svg";
+	
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
@@ -165,14 +165,6 @@ function handleFocusOut(e) {
     idea.updateIdea(newTitle, newBody);
     idea.saveToStorage(ideasArray);
   }
-}
-
-function changeStarColor(e, idea){
-    if (idea.star === true) {
-      e.target.closest('.idea-card').querySelector('.img-star').src='images/star-active.svg';
-    } else {
-      e.target.closest('.idea-card').querySelector('.img-star').src='images/star.svg';
-    }
 }
 
 function toggleStar(e) {
