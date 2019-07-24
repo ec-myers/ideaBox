@@ -5,7 +5,7 @@ This is the third project of Module 1 at the Turing School of Software & Design.
 
 IdeaBox is an idea reminder application that is a great place to store your latest and greatest (or not) ideas!! IdeaBox allows you to create ideas with the ability to create a unique title and content for each card. Additionally, you can star ideas to mark them as important and also select a quality score for each - choose from swill, plausible or genius. Once you have added all of your ideas, filter and sort them by quality or importance. The search bar will also allow you search the text of your cards to find exactly what you're looking for.
 
-View this application live on github pages [here]() and use it on your phone!
+View this application live on github pages [here](https://ec-myers.github.io/ideaBox/) and use it on your phone!
 
 ### Languages Used
 - HTML
