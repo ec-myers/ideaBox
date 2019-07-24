@@ -1,4 +1,5 @@
 var btnSave = document.querySelector('#btn-save');
+var btnStarred = document.querySelector('#btn-starred');
 var formInputs = document.querySelector('.section-top');
 var inputBody = document.querySelector('#input-body');
 var inputTitle = document.querySelector('#input-title');
@@ -8,6 +9,7 @@ var qualitiesArray = ["Swill", "Plausible", "Genius"];
 var btnMenu = document.querySelector('#icons-background');
 var searchInput = document.querySelector('#input-search');
 var ideaPrompt = document.querySelector('#idea-prompt');
+var starPrompt = document.querySelector('#star-prompt');
 var asideArea = document.querySelector("aside");
 
 asideArea.addEventListener('click', handleAsideButtons);
@@ -29,14 +31,12 @@ function handleAsideButtons(e) {
   event.preventDefault(e);
   if (event.target.id === 'btn-starred') {
     displayStarred(ideasArray); 
-  }
-  if (event.target.id === 'btn-swill') {
+    // displayStarMessage(ideasArray);
+  } else if (event.target.id === 'btn-swill') {
     displayQuality(ideasArray, 0);
-  } 
-  if (event.target.id === 'btn-plausible') {
+  } else if (event.target.id === 'btn-plausible') {
     displayQuality(ideasArray, 1);
-  }
-  if (event.target.id === 'btn-genius') {
+  } else if (event.target.id === 'btn-genius') {
     displayQuality(ideasArray, 2);
   }
 }
@@ -48,6 +48,7 @@ function handleCardButtons(e) {
     downvoteQuality(e);
   } else if (e.target.id === 'btn-delete') {
     deleteCard(e);
+    displayIdeaMessage();
   } else if (e.target.id === 'btn-star') {
     toggleStar(e);
   }
@@ -76,6 +77,7 @@ function addIdea(e) {
 function addCard(object) {
   var changeStar = object.star ? 'images/star-active.svg' : 'images/star.svg';
   var numOfIdeas = ideasArray.length;
+	
 	cardArea.insertAdjacentHTML('afterbegin', `<article class="idea-card" data-id="${object.id}">
         <header>
           <img class="img-star star" src="${changeStar}" alt="star" id="btn-star">
@@ -221,9 +223,20 @@ function returnQualitiesArray(array, qualityNum) {
 }
 
 function displayStarred(array) {
-  cardArea.innerHTML = '';
-  var starredArray = returnStarredArray(array);
-  populateCards(starredArray);
+  toggleStarredBtn();
+  if (btnStarred.innerText === 'Show Starred Ideas') {
+    cardArea.innerHTML = '';
+    var starredArray = returnStarredArray(array);
+
+    populateCards(starredArray);
+    if (starredArray.length === 0) {
+      displayStarMessage(ideasArray);
+    }
+  } else if (btnStarred.innerText === 'Show All Cards') {
+    cardArea.innerHTML = '';
+    populateCards(array);
+  }
+    updateStarredBtnText();
 }
 
 function returnStarredArray(array) {
@@ -231,6 +244,26 @@ function returnStarredArray(array) {
     return idea.star === true;
   });
   return starredArray;
+}
+
+function updateStarredBtnText() {
+  if (btnStarred.clicked === true) {
+    btnStarred.innerText = 'Show All Cards';
+  } else if (btnStarred.clicked === false) {
+    btnStarred.innerText = 'Show Starred Ideas';
+  }
+}
+
+function displayStarMessage(array) {
+  var starredArray = returnStarredArray(array);
+
+  if (starredArray.length === 0) {
+    cardArea.insertAdjacentHTML('afterbegin', `<p id="star-prompt">💡 Star some ideas!💡</p>`);
+  }
+}
+
+function toggleStarredBtn() {
+  btnStarred.clicked = !btnStarred.clicked;
 }
 
 function displayIdeaMessage(){

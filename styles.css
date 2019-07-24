@@ -359,6 +359,12 @@ textarea:focus {
   visibility: hidden;
 }
   
+#star-prompt{
+  color: #D14119;
+  font-size: 30px;
+  font-weight: 400;
+}
+
 .img-delete {
   margin-right: 5px;
 }
