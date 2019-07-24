@@ -1,5 +1,4 @@
 * {
-/*  border: solid 1px green;*/
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
@@ -15,8 +14,8 @@ body {
 /* Navigation Bar */
 
 .mobile-header {
-  visibility: hidden;
   position: absolute;
+  visibility: hidden;
 }
 
 aside {
@@ -157,13 +156,13 @@ input:focus {
 
 aside input {
   background-color: #E9E9F3;
+  border-radius: 2px;
+  border: solid 2px #5356A4;
   font-size: 16px;
   height: 40px;
   margin-bottom: 25px;
   margin-top: 5px;
   padding-left: 8px;
-  border-radius: 2px;
-  border: solid 2px #5356A4;
 }
 
 .btn-menu {
@@ -173,13 +172,12 @@ aside input {
 
 main {
   background-color: #1F1F3D;
+  box-shadow: -5px 0px 15px black;
   height: 100%;
   width: 100%;
-  box-shadow: -5px 0px 15px black
 }
 
 /* Top Section */
-
 
 .section-top {
   background-color: #A9AAD2;
@@ -220,7 +218,7 @@ article {
 
 .form-body {
   border-radius: 2px;
-  border: gray solid 1px ;
+  border: gray solid 1px;
   border: solid 1.5px #5356A4;
   font-size: 18px;
   height: 100px;
@@ -284,7 +282,7 @@ textarea:focus {
   border: solid 1px 0 1px 1px gray;
   height: 100%;
   padding: 11px 0px;
-  z-index: 10;
+  z-index: 1;
 }
 
 .div-search input {
@@ -295,7 +293,7 @@ textarea:focus {
   height: 100%;
   padding: 5px;
   width: 100%;
-  z-index: 9;
+  z-index: 0;
 }
 
 .section-top input:hover {
@@ -308,23 +306,17 @@ textarea:focus {
 .section-bottom {
   background-color: #EAEAF4;
   display: grid;
-  grid-auto-flow: row;
   grid-gap: 0 50px;
   grid-template-columns: repeat(auto-fit, minmax(274px, 1fr));
-  grid-template-rows: auto;
-  height: 100%;
   justify-items: center;
+  min-height: 800px;
   padding: 20px 60px;
 }
 
-#idea-prompt{
-  color: #D14119;
-  font-size: 17px;
-  font-weight: 700;
-}
 
 .idea-card {
   box-shadow: 0 0 10px #666666;
+  height: 339px;
   width: 100%;
   border: solid 3px #5356A4;
 }
@@ -358,11 +350,19 @@ textarea:focus {
 .hidden {
   visibility: hidden;
 }
+
+#idea-prompt{
+  color: #D14119;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 50px;
+}
   
 #star-prompt{
   color: #D14119;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
+  padding-top: 50px;
 }
 
 .img-delete {
@@ -370,9 +370,9 @@ textarea:focus {
 }
 
 .img-delete:hover {
+  content:url("images/delete-active.svg");
   transform: rotate(-20deg);
   transition: 0.2s;
-  content:url("images/delete-active.svg");
 }
 
 .img-downvote {
@@ -471,15 +471,15 @@ span {
 
 @media (max-width: 775px) {
     body {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
 
     aside {
+      height: 105vh;
       position: fixed;
       width: 100%;
-      height: 105vh;
-      z-index: 15;
+      z-index: 2;
     }
 
     .section-aside-1:hover,
@@ -499,8 +499,8 @@ span {
     }
 
     h1 {
-        font-size: 30px;
-        width: 225px;
+      font-size: 30px;
+      width: 225px;
     }
 
     aside button {
@@ -522,7 +522,7 @@ span {
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
-      z-index: 30;
+      z-index: 3;
       height: 70px;
       border-bottom: solid 1px white;
       box-shadow: 0 0 15px black;
@@ -538,70 +538,61 @@ span {
       transition: 0.25s;
     }
 
-    .x-icon-1 {
-      transform: rotate(45deg);
+    .x-icon-1,
+    .x-icon-2,
+    .x-icon-3 {
       background-color: white;
       border-radius: 5px;
-      position: absolute;
+      box-shadow: 0 0 4px black;
       height: 3px;
       margin: 0 0;
-      width: 40px;
-      box-shadow: 0 0 4px black;
+      position: absolute;
       transition: 0.25s;
+      width: 40px;
+
+    }
+
+    .x-icon-1 {
+      transform: rotate(45deg);
     }
 
     .x-icon-2 {
-      background-color: white;
-      border-radius: 5px;
-      position: absolute;
-      height: 3px;
-      margin: 0 0;
       width: 0px;
-      box-shadow: 0 0 4px black;
-      transition: 0.25s;
     }
 
     .x-icon-3 {
       transform: rotate(-45deg);
-      background-color: white;
-      border-radius: 5px;
-      position: absolute;
-      height: 3px;
-      margin: 0 0;
-      width: 40px;
-      box-shadow: 0 0 4px black;
-      transition: 0.25s;
     }
 
     .icons-backdrop-show {
-      background-color: #1F1F3D;
       align-items: center;
+      background-color: #1F1F3D;
       border-radius: 20%;
-      top: 15px;
       display: flex;
       flex-direction: column;
       height: 45px;
       justify-content: center;
-      position: fixed;
       left: 10px;
-      width: 55px;
-      z-index: 40;
+      position: fixed;
+      top: 15px;
       transition: 0.3s ease-in-out .45s;
+      width: 55px;
+      z-index: 4;
     }
 
     .icons-backdrop-hide {
       align-items: center;
       border-radius: 20%;
-      top: 15px;
       display: flex;
       flex-direction: column;
       height: 45px;
       justify-content: center;
-      position: fixed;
       left: 10px;
-      width: 55px;
-      z-index: 40;
+      position: fixed;
+      top: 15px;
       transition: 0.45s;
+      width: 55px;
+      z-index: 4;
     }
 
     .section-top {

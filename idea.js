@@ -32,6 +32,5 @@ class Idea {
 
 	updateQuality(quality) {
 		this.quality = quality;
-
 	}
 }
