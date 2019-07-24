@@ -261,6 +261,14 @@ function updateStarredBtnText() {
   }
 }
 
+function displayStarMessage(array) {
+  var starredArray = returnStarredArray(array);
+
+  if (starredArray.length === 0) {
+    cardArea.insertAdjacentHTML('afterbegin', `<p id="star-prompt">💡 Star some ideas!💡</p>`);
+  }
+}
+
 function toggleStarredBtn() {
   btnStarred.clicked = !btnStarred.clicked;
 }
