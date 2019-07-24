@@ -48,6 +48,7 @@ function handleCardButtons(e) {
     downvoteQuality(e);
   } else if (e.target.id === 'btn-delete') {
     deleteCard(e);
+    displayIdeaMessage();
   } else if (e.target.id === 'btn-star') {
     toggleStar(e);
   }
